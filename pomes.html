@@ -79,6 +79,23 @@
 	    		map:map, 
 	    		title:'Los Angelas, CA', 
 	    		url:'#la'});
+	    markers[3] = new google.maps.Marker(
+	    	{position:new google.maps.LatLng(28.539998, -81.370123), 
+	    		map:map, 
+	    		title:'Orlando, FL', 
+	    		url:'#orlando'});
+	    // markers[4] = new google.maps.Marker(
+	    // 	{position:new google.maps.LatLng(37.774188, -122.428330), 
+	    // 		map:map, 
+	    // 		title:'San Francisco, CA', 
+	    // 		url:'#sf'});
+	    // markers[5] = new google.maps.Marker(
+	    // 	{position:new google.maps.LatLng(39.163355, -75.523117), 
+	    // 		map:map, 
+	    // 		title:'Hellaware', 
+	    // 		url:'#hellaware'});
+
+	    
 
 	    // turns each map marker into a link
 		for ( i = 0; i < markers.length; i++ ) {
@@ -96,9 +113,9 @@
 	<script type="text/javascript">
 		var html = document.getElementsByTagName('html')[0];
 
-		var detroit_bgimgs = ['media/detroit/detroit3.jpg','media/detroit/detroit4.jpg','media/detroit/detroit5.jpg','media/detroit/detroit6.jpg']; 
-		var clifftop_bgimgs = ['media/clifftop/clifftop1.jpg','media/clifftop/clifftop3.jpg','media/clifftop/clifftop3.jpg','media/clifftop/clifftop4.jpg','media/clifftop/clifftop5.jpg'] 
-		var la_bgimgs = ['media/la/la1.jpg','media/la/la4.jpg','media/la/la5.jpg','media/la/la6.jpg']
+		var detroit_bgimgs = ['media/detroit/detroit3.jpg','media/detroit/detroit5.jpg','media/detroit/detroit6.jpg','media/detroit/detroit7.jpg','media/detroit/detroit9.jpg','media/detroit/detroit10.jpg']; 
+		var clifftop_bgimgs = ['media/clifftop/clifftop2.jpg','media/clifftop/clifftop3.jpg','media/clifftop/clifftop4.jpg','media/clifftop/clifftop5.jpg','media/clifftop/clifftop12.jpg'] 
+		var la_bgimgs = ['media/la/la1.jpg','media/la/la4.jpg','media/la/la5.jpg','media/la/la6.jpg','media/la/la7.jpg']
 
 		var bgimgs = [detroit_bgimgs,clifftop_bgimgs,la_bgimgs]
 
@@ -109,7 +126,7 @@
 
 			var trips = document.getElementsByClassName('newtrip');	//capture location-specific headlines
 			
-			// find the y positions of the different location zones
+			// changes background image based on which trip's media is on currently the screen
 			for (i=0;i<trips.length;i++) {  
 				//defines transition point when scrolling up && down, respectively
 				if (screen.height/4 >= trips[i].getBoundingClientRect().top && screen.height/4 <= trips[i].getBoundingClientRect().bottom) {
@@ -126,6 +143,16 @@
 					}
 				}
 			}
+
+			// creates header below splash page map which sticks to top of screen when page is scrolled past map
+			var map = document.getElementById('map-canvas');
+			var nav = document.getElementById('nav');
+			if (map.getBoundingClientRect().bottom <= 0) {
+				nav.style.position = 'fixed';
+				nav.style.top = '0';
+			} else {
+				nav.style.position = 'relative';
+			}
 		}
 
 	</script>
@@ -136,20 +163,20 @@
 
 <div id="map-canvas"></div> <!-- this is the google maps object -->
 
-<div id="content">
-
 <ul id="nav">
 <li><a href="#detroit">DETROIT</a></li>
 <li><a href="#clifftop">CLIFFTOP</a></li>
 <li><a href="#la">LOS ANGELAS</a></li>
+<li><a href="#orlando">ORLANDO</a></li>
 <li onclick="scroll(0,0)"><a href="">TO MAP</a></li>
 </ul>
 
+<div id="content">
+
 <div class="newtrip">
 <h1 id="detroit">Detroit, MI</h1>
-
 <div class="pome-block" id="2014-07-18-0919-DETROIT-KP">
-<h2>one minute pomes #1</h2>
+<h2><a href="#">one minute pomes #1</a></h2>
 <div class="pome">
 sit tight. give me fifteen.
 fifteen-­hour lifetimes 
@@ -166,7 +193,7 @@ i am with us
 </div>
 
 <div class="pome-block" id="2014-07-19-0049-DETROIT-SD">
-<h2>re: one minute pomes #1</h2>
+<h2><a href="#">re: one minute pomes #1</a></h2>
 <div class="pome">
 the taxi was shared three­-ways between 
 me, the tuba, and the driver who said 
@@ -185,7 +212,7 @@ the broken windows
 </div>
 
 <div class="pome-block" id="2014-07-19-1818-DETROIT-KP">
-<h2>one minute pomes #2­-3</h2>
+<h2><a href="#">one minute pomes #2­-3</a></h2>
 <div class="pome">
 so much depends upon
 broken glass in tall grass
@@ -213,7 +240,7 @@ of your hair
 </div>
 
 <div class="pome-block" id="2014-07-20-0004-DETROIT-SD">
-<h2>re: one minute pomes #2­-3</h2>
+<h2><a href="#">re: one minute pomes #2­-3</a></h2>
 <div class="pome">
 the king of small flowers is
 full grown in Detroit where
@@ -246,7 +273,7 @@ space between your upper lip and the boundary between tooth and gum
 </div>
 
 <div class="pome-block" id="2014-07-20-1509-DETROIT-KP">
-<h2>one minute pome #4</h2>
+<h2><a href="#">one minute pome #4</a></h2>
 <div class="pome">
 from days of awkward boys 
 running with water pistols 
@@ -278,7 +305,7 @@ for her
 </div>
 
 <div class="pome-block" id="2014-07-21-0112-DETROIT-SD">
-<h2>re: one minute pome #4</h2>
+<h2><a href="#">re: one minute pome #4</a></h2>
 <div class="pome">
 all brave heretics, heel! 
 imaginary creatures, dead lovers, 
@@ -307,7 +334,7 @@ warm like wet tissues in the afternoon sun!
 </div>
 
 <div class="pome-block" id="2014-07-21-1026-DETROIT-KP">
-<h2>re: re: one minute pome #4</h2>
+<h2><a href="#">re: re: one minute pome #4</a></h2>
 <div class="pome">
 i woke from a dead sleep at exactly 1:16am
 this morning
@@ -323,13 +350,13 @@ streamed the wake forth
 again
 </div>
 </div>
-</div>
+</div><!-- newtrip -->
 
 <div class="newtrip">
 <h1 id="clifftop">Clifftop, WV</h1>
 
 <div class="pome-block" id="2014-07-27-2028-CLIFFTOP-KP">
-<h2>i fall on my knees</h2>
+<h2><a href="#">i fall on my knees</a></h2>
 <div class="pome">
 i like rode carrie fitzimmons' perfect bike 
 for 22 miles today
@@ -378,7 +405,7 @@ i love you.
 </div>
 
 <div class="pome-block" id="2014-07-27-2240-CLIFFTOP-SD">
-<h2>imagine the tragedy</h2>
+<h2><a href="#">imagine the tragedy</a></h2>
 <div class="pome">
 imagine the tragedy of light at dusk filtered through 
 thirty seven billion leaves­­oblong, cordate, reniform, 
@@ -411,7 +438,7 @@ or even just the memory of every piece of you on every breath
 </div>
 
 <div class="pome-block" id="2014-07-28-1828-CLIFFTOP-KP">
-<h2>sometimes when you're loud</h2>
+<h2><a href="#">sometimes when you're loud</a></h2>
 <div class="pome">
 sometimes when you're loud
 when you're on a rant & ecstatic
@@ -471,7 +498,7 @@ in a universe of deserve
 </div>
 
 <div class="pome-block" id="2014-07-29-0158-CLIFFTOP-SD">
-<h2>when i am with you i want</h2>
+<h2><a href="#">when i am with you i want</a></h2>
 <div class="pome">
 to crush you: palms to ears, arms wrapped round ribs, head to toes
 
@@ -501,7 +528,7 @@ to enter you: through the mouth, the chest, the back, the bald space directly be
 </div>
 
 <div class="pome-block" id="2014-07-29-1625-CLIFFTOP-KP">
-<h2>i want to ride with you</h2>
+<h2><a href="#">i want to ride with you</a></h2>
 <div class="pome">
 i want to ride a shaky bicycle 
 spokes rattling wrists crackling 
@@ -542,7 +569,7 @@ into just words
 </div>
 
 <div class="pome-block" id="2014-07-29-2320-CLIFFTOP-SD">
-<h2>on a certain timescale</h2>
+<h2><a href="#">on a certain timescale</a></h2>
 <div class="pome">
 on a cosmic timescale
 you are less than a blink
@@ -645,7 +672,7 @@ you leave me throbbing
 </div>
 
 <div class="pome-block" id="2014-07-30-2206-CLIFFTOP-KP">
-<h2>normally</h2>
+<h2><a href="#">normally</a></h2>
 <div class="pome">
 normally
 is a funny word
@@ -703,7 +730,7 @@ witch of somerville
 </div>
 
 <div class="pome-block" id="2014-07-30-2214-CLIFFTOP-SD">
-<h2>you versus corpse plant</h2>
+<h2><a href="#">you versus corpse plant</a></h2>
 <div class="pome">
 at the edge of Pittsburg,
 we left continental humid 
@@ -748,7 +775,7 @@ even if you versus corpse plant
 </div>
 
 <div class="pome-block" id="2014-07-31-0608-CLIFFTOP-KP">
-<h2>first thought pome</h2>
+<h2><a href="#">first thought pome</a></h2>
 <div class="pome">
 when it was chilly 
 last night i reached 
@@ -757,7 +784,7 @@ for you
 </div>
 
 <div class="pome-block" id="2014-07-31-0628-CLIFFTOP-KP">
-<h2>the miscast line</h2>
+<h2><a href="#">the miscast line</a></h2>
 <div class="pome">
 everything i say i forget 
 everything you say
@@ -767,7 +794,7 @@ of future gospels
 </div>
 
 <div class="pome-block" id="2014-07-31-2200-CLIFFTOP-KP">
-<h2>the four seconds i lost today</h2>
+<h2><a href="#">the four seconds i lost today</a></h2>
 <div class="pome">
 when rashied ali drummed
 speeding through the finishline way way beyond the applause
@@ -807,7 +834,7 @@ visiting from paris said, "should we call CBS news?"
 </div>
 
 <div class="pome-block" id="2014-08-01-0001-CLIFFTOP-SD">
-<h2>you said</h2>
+<h2><a href="#">you said</a></h2>
 <div class="pome">
 just this morning in a poem that
 you forget everything you say, but lucky
@@ -849,7 +876,7 @@ crunk on the high we induce in eachother
 </div>
 
 <div class="pome-block" id="2014-08-01-0247-CLIFFTOP-KP">
-<h2>mid night pome</h2>
+<h2><a href="#">mid night pome</a></h2>
 <div class="pome">
 each day
 i like like you more 
@@ -858,7 +885,7 @@ than before
 </div>
 
 <div class="pome-block" id="2014-08-01-0253-CLIFFTOP-SD">
-<h2>I love you</h2>
+<h2><a href="#">I love you</a></h2>
 <div class="pome">
 Since I left, the poem
 I want to send each day 
@@ -879,7 +906,7 @@ you" but still I embellish.
 </div>
 
 <div class="pome-block" id="2014-08-01-0603-CLIFFTOP-SD">
-<h2>waking together</h2>
+<h2><a href="#">waking together</a></h2>
 <div class="pome">
 my neighbors must know 
 how back in boston both 
@@ -900,7 +927,7 @@ everything & nearly enough
 </div>
 
 <div class="pome-block" id="2014-08-01-2332-CLIFFTOP-KP">
-<h2>meant</h2>
+<h2><a href="#">meant</a></h2>
 <div class="pome">
 my intended love pome today
 were pushed shoved into several other forms 
@@ -969,7 +996,7 @@ andrea just today said
 </div>
 
 <div class="pome-block" id="2014-08-02-0033-CLIFFTOP-SD">
-<h2>today</h2>
+<h2><a href="#">today</a></h2>
 <div class="pome">
 midnight stroke & I am key stroke sending priceless poems through the star­filled sky.
 
@@ -997,7 +1024,7 @@ midnight again & our harmonies legit hit heaven, touching the stars in ways that
 </div>
 
 <div class="pome-block" id="2014-08-02-0152-CLIFFTOP-KP">
-<h2>just now pome</h2>
+<h2><a href="#">just now pome</a></h2>
 <div class="pome">
 this feels
 like we will never 
@@ -1006,7 +1033,7 @@ stop happening
 </div>
 
 <div class="pome-block" id="2014-08-02-0204-CLIFFTOP-SD">
-<h2>pome poem</h2>
+<h2><a href="#">pome poem</a></h2>
 <div class="pome">
 because the way you say 
 pome is it's own sweet song
@@ -1014,7 +1041,7 @@ pome is it's own sweet song
 </div>
 
 <div class="pome-block" id="2014-08-02-0338-CLIFFTOP-SD">
-<h2>an as-i-lay-in-bed poem</h2>
+<h2><a href="#">an as-i-lay-in-bed poem</a></h2>
 <div class="pome">
 in my universe of deserve 
 I wonder why I
@@ -1028,7 +1055,7 @@ rather than I'm sorry
 </div>
 
 <div class="pome-block" id="2014-08-02-0622-CLIFFTOP-KP">
-<h2>on your pillow </h2>
+<h2><a href="#">on your pillow </a></h2>
 <div class="pome">
 as i rest on your pillow
 having just awoken from a most 
@@ -1058,7 +1085,7 @@ i will not shake
 </div>
 
 <div class="pome-block" id="2014-08-02-2120-CLIFFTOP-KP">
-<h2>this is how</h2>
+<h2><a href="#">this is how</a></h2>
 <div class="pome">
 seth shenfield
 the first person to hire me in boston
@@ -1157,7 +1184,7 @@ one after another after another
 </div>
 
 <div class="pome-block" id="2014-08-02-2126-CLIFFTOP-KP">
-<h2>74 today </h2>
+<h2><a href="#">74 today </a></h2>
 <div class="pome">
 first five minutes meeting carrie fitzsimmons' 
 seventy four year old father bill:
@@ -1188,7 +1215,7 @@ i sat right there with my dog
 </div>
 
 <div class="pome-block" id="2014-08-03-0042-CLIFFTOP-SD">
-<h2>actually, eight know</h2>
+<h2><a href="#">actually, eight know</a></h2>
 <div class="pome">
 before leaving
 for WV I told Kate, who is a deep­-feeler like me and not at all like me, about you,
@@ -1251,7 +1278,7 @@ in a lookout tower: leave the wife­-house, love the kids, trust the magic
 </div>
 
 <div class="pome-block" id="2014-08-03-0205-CLIFFTOP-KP">
-<h2>two a.m.</h2>
+<h2><a href="#">two a.m.</a></h2>
 <div class="pome">
 my thumb 
 this screen 
@@ -1261,7 +1288,7 @@ everything
 </div>
 
 <div class="pome-block" id="2014-08-03-0633-CLIFFTOP-KP">
-<h2>almost asleep</h2>
+<h2><a href="#">almost asleep</a></h2>
 <div class="pome">
 that moment
 almost fallen back asleep
@@ -1273,7 +1300,7 @@ you at all the ends
 </div>
 
 <div class="pome-block" id="2014-08-03-0828-CLIFFTOP-SD">
-<h2>leaving-coming poem</h2>
+<h2><a href="#">leaving-coming poem</a></h2>
 <div class="pome">
 northward priceward 
 away from the land of 
@@ -1282,7 +1309,7 @@ thumbs and screens
 </div>
 
 <div class="pome-block" id="2014-08-03-1133-CLIFFTOP-KP">
-<h2>re: leaving-coming poem </h2>
+<h2><a href="#">re: leaving-coming poem </a></h2>
 <div class="pome">
 come you traveler
 come home to me
@@ -1310,7 +1337,7 @@ home to me
 </div>
 
 <div class="pome-block" id="2014-08-03-2326-CLIFFTOP-SD">
-<h2>you now pls!</h2>
+<h2><a href="#">you now pls!</a></h2>
 <div class="pome">
 you!
 yes!
@@ -1357,7 +1384,7 @@ ask now for our all own two!
 </div>
 
 <div class="pome-block" id="2014-08-03-2337-CLIFFTOP-SD">
-<h2>Clifftop, WV in Lichen, Fungi, & Moss (a poem in pictures)</h2>
+<h2><a href="#">Clifftop, WV in Lichen, Fungi, & Moss (a poem in pictures)</a></h2>
 <div class="pome">
 	<div>
 <img class="fungi-pome" src="media/clifftop/fungi1.JPG">
@@ -1373,13 +1400,13 @@ ask now for our all own two!
 	</div>
 </div>
 </div>
-</div>
+</div><!-- newtrip -->
 
 <div class="newtrip">
 <h1 id="la">Los Angelas, CA</h1>
 
 <div class="pome-block" id="2014-11-18-1312-LA-SD">
-<h2>before you left</h2>
+<h2><a href="#">before you left</a></h2>
 <div class="pome">
 i wrote this line before you even left 
 like i could get a head start on missing 
@@ -1428,7 +1455,7 @@ by you, here, now, or ever.
 </div>
 
 <div class="pome-block" id="2014-11-18-1506-LA-KP">
-<h2>Adapted from Elegy for Neal Cassady by Allen Ginsberg (Feburary 10, 1968, 5 ­ 5:30 AM)</h2>
+<h2><a href="#">Adapted from Elegy for Neal Cassady by Allen Ginsberg (Feburary 10, 1968, 5 ­ 5:30 AM)</a></h2>
 <div class="pome">
 (nov.18, 2014, 11:30 am ­ 12:00 pm gmt)
 
@@ -1467,7 +1494,7 @@ i love you
 </div>
 
 <div class="pome-block" id="2014-11-19-1354-LA-SD">
-<h2>my fist fight zone</h2>
+<h2><a href="#">my fist fight zone</a></h2>
 <div class="pome">
 you are my fist fight zone 
 my zone of absolute 
@@ -1508,7 +1535,7 @@ is energy and nothing is real
 </div>
 
 <div class="pome-block" id="2014-11-19-1621-LA-KP">
-<h2>douchebag</h2>
+<h2><a href="#">douchebag</a></h2>
 <div class="pome">
 los angeles is nice, home of
 
@@ -1589,7 +1616,7 @@ i love you
 </div>
 
 <div class="pome-block" id="2014-11-19-2155-LA-SD">
-<h2>text poem #1</h2>
+<h2><a href="#">text poem #1</a></h2>
 <div class="pome">
 you are everything
 except here
@@ -1607,7 +1634,7 @@ except this
 </div>
 
 <div class="pome-block" id="2014-11-19-2311-LA-KP">
-<h2>text poem #2</h2>
+<h2><a href="#">text poem #2</a></h2>
 <div class="pome">
 i stepped out of class to
 write you
@@ -1626,7 +1653,7 @@ every forevery
 </div>
 
 <div class="pome-block" id="2014-11-20-1216-LA-SD">
-<h2>the all out west</h2>
+<h2><a href="#">the all out west</a></h2>
 <div class="pome">
 there is the worst where
 there where the hills sing
@@ -1658,7 +1685,7 @@ there where the all out west is
 </div>
 
 <div class="pome-block" id="2014-11-20-2128-LA-SD">
-<h2>emi crying</h2>
+<h2><a href="#">emi crying</a></h2>
 <div class="pome">
 the baby upstairs 
 is wailing
@@ -1679,7 +1706,7 @@ fucking world
 </div>
 
 <div class="pome-block" id="2014-11-21-0005-LA-KP">
-<h2>text poem #3</h2>
+<h2><a href="#">text poem #3</a></h2>
 <div class="pome">
 funder speaks 
 you
@@ -1696,7 +1723,7 @@ center middle out
 </div>
 
 <div class="pome-block" id="2014-11-21-0332-LA-SD">
-<h2>text poem #4</h2>
+<h2><a href="#">text poem #4</a></h2>
 <div class="pome">
 all you 
 every moment 
@@ -1709,7 +1736,7 @@ every neck
 </div>
 
 <div class="pome-block" id="2014-11-21-1507-LA-KP">
-<h2>text poem #5</h2>
+<h2><a href="#">text poem #5</a></h2>
 <div class="pome">
 you 
 i don't know what to say
@@ -1726,28 +1753,73 @@ i'm coming home to
 you
 </div>
 </div>
+</div><!-- newtrip -->
+
+<div class="newtrip">
+<h1 id="orlando">Orlando, FL</h1>
+
+<div class="pome-block" id="2014-07-18-0919-DETROIT-KP">
+<h2><a href="#">orlando poems</a></h2>
+<div class="pome">
+la la la
+laaaaaa
+la
 </div>
+</div>
+</div><!-- newtrip -->
+
 
 </div> <!-- content -->
 
 </body>
 
-</html>
+<script>
 
+window.onload = function() {
+		// setting individual links to poems
+		var pomeblocks = document.getElementsByClassName('pome-block');
+		var ids = []
+		for (i=0;i<pomeblocks.length;i++) {
+			ids.push(pomeblocks[i].getAttribute('id'));
+		}		
 
-<!-- OLD STUFF
-	window.onload = function() {
-		pomes = document.getElementsByClassName('pome-block');
+		var a=[];
+		for (i=0;i<pomeblocks.length;i++) {
+			a.push(pomeblocks[i].querySelectorAll('h2 a')[0]);
+			a[i].href="#"+ids[i];
+		}
 
-		pome_ids = [];
-		pome_ids_split = []
-		for (i=0; i<pomes.length; i++) {
-			pome_ids.push(pomes[i].getAttribute('id'));
-			pome_ids_split.push(pome_ids[i].split('-'));
+		// displaying timestamps for each poem
+		reference_info = [];
+		ref_dict={};
+		for (i=0;i<ids.length;i++) {
+			//add timestamp/author/trip location data as data-attributes to pome-block classes
+			pomeblocks[i].setAttribute('data-year',ids[i].split('-')[0]);
+			pomeblocks[i].setAttribute('data-month',ids[i].split('-')[1]);
+			pomeblocks[i].setAttribute('data-day',ids[i].split('-')[2]);
+			pomeblocks[i].setAttribute('data-time',ids[i].split('-')[3]);
+			pomeblocks[i].setAttribute('data-trip',ids[i].split('-')[4]);
+			pomeblocks[i].setAttribute('data-author',ids[i].split('-')[5]);
+		}
+
+		// creates a byline for each poem based on info encoded in pome-block id
+		for (i=0;i<pomeblocks.length;i++) {
+			var newdiv = document.createElement('div');
+
+			// styles time to look like digital clock time with ":"
+			var time_tmp = pomeblocks[i].getAttribute('data-time');
+			var time = time_tmp.match(/.{1,2}/g)[0] + ":" + time_tmp.match(/.{1,2}/g)[1];
+			
+			// constructs byline from id contents
+			newdiv.setAttribute('class','byline')
+			newdiv.innerHTML = "written by " + pomeblocks[i].getAttribute('data-author') + " on " + pomeblocks[i].getAttribute('data-month') + "." + pomeblocks[i].getAttribute('data-day') + "." + pomeblocks[i].getAttribute('data-year') + " at " + time + " EST in " + pomeblocks[i].getAttribute('data-trip');
+
+			// inserts byline after h2 elements (e.g. poem titles) 
+			parentdiv = pomeblocks[i].querySelectorAll('h2')[0];
+			parentdiv.appendChild(newdiv);
 		}
 
 	}
+</script>
 
-	function pomescroll(id) {
-		document.getElementById(pome_ids[id]).scrollIntoView();
-	}	 -->
+</html>
