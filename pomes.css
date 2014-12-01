@@ -1,0 +1,111 @@
+html { 
+	/* sets background image to be fixed, centered, full-page, and proportional to original image 
+	 detroit image = media/detroit/detroit6.jpg
+	 clifftop image = media/clifftop/clifftop3/4/5.jpg
+	 la image = media/la/la1.jpg*/  
+  	background: url("media/detroit/detroit6.jpg") no-repeat center center fixed;
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+
+  	/*This section adds a fading effect when new bg images are introduced.*/
+  	-webkit-transition: background 500ms ease-in 2s; /* property duration timing-function delay */
+    -moz-transition: background 500ms ease-in 2s;
+    -o-transition: background 500ms ease-in 2s;
+    transition: background 500ms ease-in 2s;
+
+
+    -webkit-transition-property: background;
+    -webkit-transition-duration: 500ms;
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition-delay: 100ms;
+
+    -moz-transition-property: background;
+    -moz-transition-duration: 500ms;
+    -moz-transition-timing-function: ease-in;
+    -moz-transition-delay: 100ms;
+
+    -o-transition-property: background;
+    -o-transition-duration: 500ms;
+    -o-transition-timing-function: ease-in;
+    -o-transition-delay: 100ms;
+
+    transition-property: background;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in;
+    transition-delay: 100ms;
+}
+
+body {
+	padding:0;
+	margin:0;
+	font-family: helvetica, sans-serif;
+	font-size: 18px;
+}
+
+#content {
+	/*Sets and centers backdrop of central pome listing*/
+	width:45%;
+	margin:auto;
+	background-color:rgba(255,255,255,.5);
+	padding:40px;
+}
+
+.pome {
+	/* maintains line breaks & white-space */
+	white-space:pre-wrap;  
+
+}
+
+h1 {
+	/*Trip titles*/
+	font-size:44px;
+	padding-top:40px;
+}
+
+h2 {
+	/*Poem titles*/
+	font-size:28px;
+}
+
+ul#nav {
+	/*Trip by trip nav bar*/
+	list-style-type:none;
+	font-size:24px;
+	font-family:helvetica,sans-serif;
+	text-decoration:none;
+	color:black;
+	background-color:rgba(255,255,255,.5);
+	padding:10px;
+
+	position:fixed;
+	right:1%;
+	bottom:1%;
+}
+
+#nav a {
+	text-decoration:none;
+	color:black;
+}
+
+audio, img {
+	width:100%;
+}
+
+#map-canvas { 
+	height:700px; 
+	width:100%;
+	margin:0; 
+	padding:0;
+	border-bottom:solid 3px;
+}
+
+.fungi-pome {
+	width:46%;
+	padding:2%;
+	float:left;
+}
+
+
+
