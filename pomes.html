@@ -115,14 +115,13 @@
 		var clifftop_bgimgs = ['media/clifftop/clifftop2.jpg','media/clifftop/clifftop3.jpg','media/clifftop/clifftop4.jpg','media/clifftop/clifftop5.jpg','media/clifftop/clifftop12.jpg'] 
 		var la_bgimgs = ['media/la/la1.jpg','media/la/la4.jpg','media/la/la5.jpg','media/la/la6.jpg','media/la/la7.jpg']
 
+		var trips = document.getElementsByClassName('newtrip');	//capture location-specific headlines	
+		
 		var bgimgs = [detroit_bgimgs,clifftop_bgimgs,la_bgimgs]
-
 		var bgimg_curr;
 		var bgimg_new;
 
 		window.onscroll = function (event) {
-
-			var trips = document.getElementsByClassName('newtrip');	//capture location-specific headlines
 			
 			// changes background image based on which trip's media is on currently the screen
 			for (i=0;i<trips.length;i++) {  
@@ -153,6 +152,18 @@
 			}
 		}
 
+		function nav_onclick() {
+			// rotates through trip-specific bgimgs if nav link clicked multiple times
+			if (document.URL == event.target.href) {
+				var loc = document.URL.split('#')[1]; // parse trip name from current url
+				var trip_pics = eval(loc + "_bgimgs"); // grabs list of trip related bgimgs
+				var random_trip_pic = trip_pics[(Math.floor(Math.random() * trip_pics.length))]; 
+
+				html.style.background = 'url(' + random_trip_pic + ') no-repeat center center fixed';
+				html.style.backgroundSize = 'cover';
+			}
+		}
+
 	</script>
 
 </head>
@@ -162,10 +173,10 @@
 <div id="map-canvas"></div> <!-- this is the google maps object -->
 
 <ul id="nav">
-<li><a href="#detroit">DETROIT</a></li>
-<li><a href="#clifftop">CLIFFTOP</a></li>
-<li><a href="#la">LOS ANGELAS</a></li>
-<li><a href="#orlando">ORLANDO</a></li>
+<li><a onclick="nav_onclick()" href="#detroit">DETROIT</a></li>
+<li><a onclick="nav_onclick()" href="#clifftop">CLIFFTOP</a></li>
+<li><a onclick="nav_onclick()" href="#la">LOS ANGELAS</a></li>
+<li><a onclick="nav_onclick()" href="#orlando">ORLANDO</a></li>
 <li onclick="scroll(0,0)"><a href="">TO MAP</a></li>
 </ul>
 
