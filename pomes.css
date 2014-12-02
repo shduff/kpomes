@@ -89,6 +89,7 @@ ul#nav {
 	font-size:18px;
 	font-family:helvetica,sans-serif;
 	text-decoration:none;
+	box-shadow: 0 1px 1px #000;
 }
 
 #nav li {
