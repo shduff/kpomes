@@ -45,7 +45,7 @@
 			    featureType: "all",
 			    elementType: "all",
 			    stylers: [
-			        { saturation: -60 } 
+			        { saturation: -60 },
 			    ]
 			  },
 			  {
@@ -55,8 +55,7 @@
 			        { visibility: "off" } 
 			    ]
 			  }
-
-		];
+          ];
 
 		// defines map object and applies styling to that object
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -101,7 +100,6 @@
 		for ( i = 0; i < markers.length; i++ ) {
 		    google.maps.event.addListener(markers[i], 'click', function() {
 		      window.location.href = this.url;  
-		      console.log(markers[i]);
 		    });
 		}
 	}
@@ -144,7 +142,7 @@
 				}
 			}
 
-			// creates header below splash page map which sticks to top of screen when page is scrolled past map
+			// creates navbar below splash page map which sticks to top of screen when page is scrolled past map
 			var map = document.getElementById('map-canvas');
 			var nav = document.getElementById('nav');
 			if (map.getBoundingClientRect().bottom <= 0) {
@@ -1384,9 +1382,10 @@ ask now for our all own two!
 </div>
 
 <div class="pome-block" id="2014-08-03-2337-CLIFFTOP-SD">
-<h2><a href="#">Clifftop, WV in Lichen, Fungi, & Moss (a poem in pictures)</a></h2>
+<h2><a href="#">Clifftop, WV in Lichen, Fungi, & Moss </a></h2>
 <div class="pome">
-	<div>
+(a poem in pictures)
+<div id="fungi-pome">
 <img class="fungi-pome" src="media/clifftop/fungi1.JPG">
 <img class="fungi-pome" src="media/clifftop/fungi2.JPG">
 <img class="fungi-pome" src="media/clifftop/fungi3.JPG">
@@ -1397,7 +1396,8 @@ ask now for our all own two!
 <img class="fungi-pome" src="media/clifftop/fungi8.JPG">
 <img class="fungi-pome" src="media/clifftop/fungi9.JPG">
 <img class="fungi-pome" src="media/clifftop/fungi10.JPG">
-	</div>
+</div><!--fungi-pome-->
+
 </div>
 </div>
 </div><!-- newtrip -->
@@ -1776,6 +1776,8 @@ la
 <script>
 
 window.onload = function() {
+
+
 		// setting individual links to poems
 		var pomeblocks = document.getElementsByClassName('pome-block');
 		var ids = []
@@ -1812,7 +1814,7 @@ window.onload = function() {
 			
 			// constructs byline from id contents
 			newdiv.setAttribute('class','byline')
-			newdiv.innerHTML = "written by " + pomeblocks[i].getAttribute('data-author') + " on " + pomeblocks[i].getAttribute('data-month') + "." + pomeblocks[i].getAttribute('data-day') + "." + pomeblocks[i].getAttribute('data-year') + " at " + time + " EST in " + pomeblocks[i].getAttribute('data-trip');
+			newdiv.innerHTML = "written by " + pomeblocks[i].getAttribute('data-author') + " on " + pomeblocks[i].getAttribute('data-month') + "." + pomeblocks[i].getAttribute('data-day') + "." + pomeblocks[i].getAttribute('data-year') + " at " + time + " EST";
 
 			// inserts byline after h2 elements (e.g. poem titles) 
 			parentdiv = pomeblocks[i].querySelectorAll('h2')[0];
