@@ -49,7 +49,7 @@ body {
 	width:45%;
 	margin:auto;
 	background-color:rgba(255,255,255,.7);
-	padding:0 40px 0 40px;
+	padding:0 40px 60px 40px;
 }
 
 .pome {
@@ -62,14 +62,15 @@ h1 {
 	/*Trip titles*/
 	font-size:44px;
 	font-weight:normal;
-	padding-top:40px;
+	padding:80px 0 0 0;
+
 }
 
 h2 {
 	/*Poem titles*/
 	font-size:28px;
 	margin:0;
-	padding:30px 0 0 0;
+	padding:45px 0 0 0;
 }
 
 a {
@@ -89,7 +90,7 @@ ul#nav {
 	font-size:18px;
 	font-family:helvetica,sans-serif;
 	text-decoration:none;
-	box-shadow: 0 1px 1px #000;
+	box-shadow: 0 2px 2px #000;
 }
 
 #nav li {
@@ -103,6 +104,8 @@ ul#nav {
 
 	background-color:#FFFFFF; /*rgba(255,255,255,.95);*/
 	border-top:solid 1px;
+	border-bottom:solid 1px;
+
 }
 
 #nav a {
