@@ -84,7 +84,7 @@ ul#nav {
 	font-size:18px;
 	font-family:helvetica,sans-serif;
 	text-decoration:none;
-	box-shadow: 0 2px 2px #000;
+	box-shadow: 0 2px 2px #606060;
 }
 
 #nav li {
@@ -120,31 +120,35 @@ audio, img {
 	margin:0; 
 	padding:0;
 
+	/*places title over map canvas*/
 	position:relative;
+}
+
+.site-title {
+	font-weight:normal;
+	margin:0;
+	padding:0;
+	color:#FF4500;
+	text-shadow: 2px 2px #606060;
+
+	/*places title over map canvas*/
+	position:absolute;
+	z-index:100;
 }
 
 #site-title-pt1 {
 	font-size:80px;
-	font-weight:normal;
-	margin:0;
-	padding:0;
 
-	position:absolute;
 	top:100px;
 	left:180px;
-	z-index:100;
 }
 
 #site-title-pt2 {
 	font-size:80px;
-	font-weight:normal;
-	margin:0;
-	padding:0;
 
-	position:absolute;
 	top:180px;
 	left:290px;
-	z-index:100;
+
 
 }
 

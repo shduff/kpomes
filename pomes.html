@@ -45,7 +45,10 @@
 			    featureType: "all",
 			    elementType: "all",
 			    stylers: [
-			        { saturation: -60 },
+			      	{ hue: "#300030" },
+ 					{ saturation: -92 },
+  					{ lightness: -20 },
+  					// { gamma: 1.51 }
 			    ]
 			  },
 			  {
@@ -61,25 +64,30 @@
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         map.setOptions({styles:styles});
 	  	
-	    var markers = []
+	  	var icon = 'media/map-marker.png';
+	    var markers = [];
 	    // items added to this list will be added to the navigation map at the top of the site
 	    markers[0] = new google.maps.Marker(
 	    	{position:new google.maps.LatLng(42.333172, -83.044960), 
 	    		map:map, 
+	    		icon:icon,
 	    		title:'Detroit, MI', 
 	    		url:'#detroit'});
 	    markers[1] = new google.maps.Marker(
 	    	{position:new google.maps.LatLng(38.004111, -80.944114), 
 	    		map:map, 
+	    		icon:icon,
 	    		title:'Clifftop, WV', 
 	    		url:'#clifftop'});
 	    markers[2] = new google.maps.Marker(
 	    	{position:new google.maps.LatLng(34.056915, -118.248311), 
 	    		map:map, 
+	    		icon:icon,
 	    		title:'Los Angelas, CA', 
 	    		url:'#la'});
 	    markers[3] = new google.maps.Marker(
 	    	{position:new google.maps.LatLng(28.539998, -81.370123), 
+	    		icon:icon,
 	    		map:map, 
 	    		title:'Orlando, FL', 
 	    		url:'#orlando'});
@@ -172,8 +180,8 @@
 <body>
 
 <div id="splash">
-<h1 id="site-title-pt1">while i was</h1> 
-<h1 id="site-title-pt2">away pomes</h1>
+<h1 class="site-title" id="site-title-pt1">while i was</h1> 
+<h1 class="site-title" id="site-title-pt2">away pomes</h1>
 <div id="map-canvas">
 </div> <!-- this is the google maps object -->
 </div><!--splash-->
