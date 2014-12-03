@@ -52,12 +52,6 @@ body {
 	padding:0 40px 60px 40px;
 }
 
-.pome {
-	/* maintains line breaks & white-space */
-	white-space:pre-wrap;  
-
-}
-
 h1 {
 	/*Trip titles*/
 	font-size:44px;
@@ -118,11 +112,46 @@ audio, img {
 	width:100%;
 }
 
+
+/*Pertaining to the splash page, map, and titles*/
 #map-canvas { 
 	height:700px; 
 	width:100%;
 	margin:0; 
 	padding:0;
+
+	position:relative;
+}
+
+#site-title-pt1 {
+	font-size:80px;
+	font-weight:normal;
+	margin:0;
+	padding:0;
+
+	position:absolute;
+	top:100px;
+	left:180px;
+	z-index:100;
+}
+
+#site-title-pt2 {
+	font-size:80px;
+	font-weight:normal;
+	margin:0;
+	padding:0;
+
+	position:absolute;
+	top:180px;
+	left:290px;
+	z-index:100;
+
+}
+
+/*Pertaining to the main content of the site: poems, bylines, labels, etc.*/
+.pome {
+	/* maintains line breaks & white-space */
+	white-space:pre-wrap;  
 }
 
 .byline {
@@ -134,9 +163,9 @@ audio, img {
 }
 
 .fungi-pome {
-	width:46%;
-	padding:2%;
-	float:left;
+	width:75%;
+	margin:auto;
+	/*float:left;*/
 }
 
 
