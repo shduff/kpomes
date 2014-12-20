@@ -1,11 +1,41 @@
+// {
+//     "name": "staticheroku",
+//     "version": "0.0.1",
+//     "dependencies": {
+//         "express": "~4.9.8"
+//     },
+//     "engines": {
+//         "node": "0.8.x",
+//         "npm": "1.1.x"
+//     }
+// }
+
+
+
+
+
 {
-    "name": "staticheroku",
-    "version": "0.0.1",
-    "dependencies": {
-        "express": "~4.9.8"
-    },
-    "engines": {
-        "node": "0.8.x",
-        "npm": "1.1.x"
-    }
+  "name": "kpomes",
+  "version": "0.1.2",
+  "description": "while you were away pomes for kp",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "~4.9.x"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.1.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/duffles/kpomes"
+  },
+  "keywords": [
+    "love",
+    "pomes",
+  ],
+  "license": "MIT"
 }
