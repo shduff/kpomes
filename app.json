@@ -1,7 +1,6 @@
 {
-  "name": "Node.js Getting Started",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/heroku/kpomes",
-  "logo": "http://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["node", "express", "static"]
+  "name": "kpomes",
+  "description": "while you were away pomes for kp",
+  "repository": "https://github.com/duffles/kpomes",
+  "keywords": ["love", "pome"]
 }
