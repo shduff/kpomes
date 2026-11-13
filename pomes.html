@@ -5,118 +5,28 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<link rel='stylesheet' type="text/css" href="./pomes.css">
 
-	<script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO3fg2p5XKQxFip1i8bsxv-cO4UcDwFUM"></script>
-
-    <script type="text/javascript">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoT8+8H+4jUQw=" crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
       function initialize() {
-
-        var mapOptions = {
-        	center: { lat: 39, lng: -99},
-	        zoom: 5,
-
-	        // disables scroll-initiated zooming
-    	    scrollwheel: false, 
-
-    	    // hides other scaling, zooming, and display options
-        	panControl: false,
-    		zoomControl: false,
-   			scaleControl: false,
-   			streetViewControl: false,
-   			overviewMapControl: false,
-
-   			//display satellite map w high level labels as default
-   			mapTypeId: google.maps.MapTypeId.HYBRID,
-        };
-
-        var styles = [
-        //stuff placed in here will style the map -- when it is a road map displayed
-			  // {
-			  //   featureType: "administrative.locality",
-			  //   elementType: "labels",
-			  //   stylers: [
-			  //       { visibility: "off" }
-			  //   ]
-			  // },
-			  // {
-			  //   featureType: "road",
-			  //   stylers: [
-			  //       { visibility: "off" }
-			  //   ]
-			  // },
-			  // {
-			  //   featureType: "all",
-			  //   elementType: "all",
-			  //   stylers: [
-			  //     	// { hue: "#300030" },
- 				// 	{ saturation: -100 },
-  			// 		{ lightness: -10 },
-  			// 		// { gamma: 1.51 }
-			  //   ]
-			  // },
-			  {
-			    featureType: "administrative.country",
-			    elementType: "labels",
-			    stylers: [
-			        { visibility: "off" } 
-			    ]
-			  }
-          ];
-
-		// defines map object and applies styling to that object
-        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        map.setOptions({styles:styles});
-	  	
-	  	var icon = 'media/map-marker1.png';
-	    var markers = [];
-	    // items added to this list will be added to the navigation map at the top of the site
-	    markers[0] = new google.maps.Marker(
-	    	{position:new google.maps.LatLng(42.333172, -83.044960), 
-	    		map:map, 
-	    		icon:icon,
-	    		title:'Detroit, MI', 
-	    		url:'#detroit'});
-	    markers[1] = new google.maps.Marker(
-	    	{position:new google.maps.LatLng(38.004111, -80.944114), 
-	    		map:map, 
-	    		icon:icon,
-	    		title:'Clifftop, WV', 
-	    		url:'#clifftop'});
-	    markers[2] = new google.maps.Marker(
-	    	{position:new google.maps.LatLng(34.056915, -118.248311), 
-	    		map:map, 
-	    		icon:icon,
-	    		title:'Los Angelas, CA', 
-	    		url:'#la'});
-	    markers[3] = new google.maps.Marker(
-	    	{position:new google.maps.LatLng(28.539998, -81.370123), 
-	    		icon:icon,
-	    		map:map, 
-	    		title:'Orlando, FL', 
-	    		url:'#orlando'});
-	    // markers[4] = new google.maps.Marker(
-	    // 	{position:new google.maps.LatLng(37.774188, -122.428330), 
-	    // 		map:map, 
-	    // 		title:'San Francisco, CA', 
-	    // 		url:'#sf'});
-	    // markers[5] = new google.maps.Marker(
-	    // 	{position:new google.maps.LatLng(39.163355, -75.523117), 
-	    // 		map:map, 
-	    // 		title:'Hellaware', 
-	    // 		url:'#hellaware'});
-
-	    
-
-	    // turns each map marker into a link
-		for ( i = 0; i < markers.length; i++ ) {
-		    google.maps.event.addListener(markers[i], 'click', function() {
-		      window.location.href = this.url;  
-		    });
-		}
-	}
-
-    google.maps.event.addDomListener(window, 'load', initialize);
-
+        var map = L.map('map-canvas', {scrollWheelZoom:false, zoomControl:false});
+        map.setView([39, -99], 4);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        var icon = L.icon({iconUrl:'media/map-marker1.png', iconSize:[32,32], iconAnchor:[16,32]});
+        [
+          [42.333172,-83.044960,'Detroit, MI','#detroit'],
+          [38.004111,-80.944114,'Clifftop, WV','#clifftop'],
+          [34.056915,-118.248311,'Los Angeles, CA','#la'],
+          [28.539998,-81.370123,'Orlando, FL','#orlando']
+        ].forEach(function(place) {
+          L.marker([place[0],place[1]], {icon:icon, title:place[2]})
+            .addTo(map).bindTooltip(place[2]).on('click',function(){window.location.hash=place[3];});
+        });
+      }
+      window.addEventListener('load',initialize);
     </script>
 
 	<script type="text/javascript">
