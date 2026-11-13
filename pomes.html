@@ -29,64 +29,67 @@
       window.addEventListener('load',initialize);
     </script>
 
-	<script type="text/javascript">
-		var html = document.getElementsByTagName('html')[0];
+<script type="text/javascript">
+    // Each location has its own collection of original photographs.
+    const locationPhotos = {
+      detroit: ['detroit3.jpg','detroit5.jpg','detroit6.jpg','detroit7.JPG','detroit9.JPG','detroit10.JPG'],
+      clifftop: ['clifftop2.JPG','clifftop3.JPG','clifftop4.JPG','clifftop5.JPG','clifftop12.JPG'],
+      la: ['la1.JPG','la4.JPG','la5.JPG','la6.JPG','la7.JPG'],
+      orlando: ['orlando1.JPG','orlando2.JPG','orlando4.JPG','orlando6.JPG','orlando7.JPG']
+    };
+    const locations = ['detroit','clifftop','la','orlando'];
+    let activeLocation = null;
+    let activePhoto = null;
 
-		var detroit_bgimgs = ['media/detroit/detroit3.jpg','media/detroit/detroit5.jpg','media/detroit/detroit6.jpg','media/detroit/detroit7.JPG','media/detroit/detroit9.JPG','media/detroit/detroit10.JPG']; 
-		var clifftop_bgimgs = ['media/clifftop/clifftop2.jpg','media/clifftop/clifftop3.jpg','media/clifftop/clifftop4.jpg','media/clifftop/clifftop5.jpg','media/clifftop/clifftop12.jpg'] 
-		var la_bgimgs = ['media/la/la1.jpg','media/la/la4.jpg','media/la/la5.jpg','media/la/la6.jpg','media/la/la7.jpg']
-		var orlando_bgimgs = ['media/orlando/orlando1.jpg','media/orlando/orlando2.jpg','media/orlando/orlando4.jpg','media/orlando/orlando6.jpg','media/orlando/orlando7.jpg']
-		var bgimgs = [detroit_bgimgs,clifftop_bgimgs,la_bgimgs,orlando_bgimgs]
+    function choosePhoto(location, rotate) {
+      const photos = locationPhotos[location];
+      if (!photos) return;
+      let choices = photos;
+      if (rotate && activeLocation === location && photos.length > 1) {
+        choices = photos.filter(photo => 'media/' + location + '/' + photo !== activePhoto);
+      }
+      const next = 'media/' + location + '/' + choices[Math.floor(Math.random() * choices.length)];
+      if (next === activePhoto) return;
+      const preload = new Image();
+      preload.onload = function () {
+        // Don't let an older, slower photo overwrite the newly selected location.
+        if (activeLocation === location && activePhoto === next) {
+          document.body.style.backgroundImage = 'url("' + next + '")';
+        }
+      };
+      activeLocation = location;
+      activePhoto = next;
+      preload.src = next;
+    }
 
-		var trips = document.getElementsByClassName('newtrip');	//capture location-specific headlines	
-		
-		var bgimg_curr;
-		var bgimg_new;
+    function updateScroll() {
+      const sections = Array.from(document.querySelectorAll('.newtrip'));
+      const position = window.innerHeight / 3;
+      const current = sections.findIndex(section => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= position && rect.bottom > position;
+      });
+      if (current >= 0 && activeLocation !== locations[current]) {
+        choosePhoto(locations[current], false);
+      }
+      const map = document.getElementById('map-canvas');
+      const nav = document.getElementById('nav');
+      if (map && nav) {
+        const pastMap = map.getBoundingClientRect().bottom <= 0;
+        nav.style.position = pastMap ? 'fixed' : 'relative';
+        nav.style.top = pastMap ? '0' : '';
+      }
+    }
 
-		window.onscroll = function (event) {
-			
-			// changes background image based on which trip's media is on currently the screen
-			for (i=0;i<trips.length;i++) {  
-				//defines transition point when scrolling up && down, respectively
-				if (window.innerHeight/3 >= trips[i].getBoundingClientRect().top && window.innerHeight/3 <= trips[i].getBoundingClientRect().bottom) {
-					if (bgimgs[i].indexOf(bgimg_curr) >= 0) { 
-						// if current bgimg is in set of pics associated with this trip, don't change bgimg 
-						bgimg_new = bgimg_curr;
-					} else {
-						// if current bgimg is not in set of pics associated with this trip, display new pic chosen randomly from this trip's image collection
-						bgimg_curr = bgimgs[i][(Math.floor(Math.random() * bgimgs[i].length))];
-						bgimg_new = bgimg_curr;
-						
-						html.style.background = 'url(' + bgimg_new + ') no-repeat center center fixed';
-						html.style.backgroundSize = 'cover';
-					}
-				}
-			}
+    function nav_onclick(event) {
+      const location = event.currentTarget.getAttribute('href').slice(1);
+      if (location === activeLocation) choosePhoto(location, true);
+    }
 
-			// creates navbar below splash page map which sticks to top of screen when page is scrolled past map
-			var map = document.getElementById('map-canvas');
-			var nav = document.getElementById('nav');
-			if (map.getBoundingClientRect().bottom <= 0) {
-				nav.style.position = 'fixed';
-				nav.style.top = '0';
-			} else {
-				nav.style.position = 'relative';
-			}
-		}
-
-		function nav_onclick() {
-			// rotates through trip-specific bgimgs if nav link clicked multiple times
-			if (document.URL == event.target.href) {
-				var loc = document.URL.split('#')[1]; // parse trip name from current url
-				var trip_pics = eval(loc + "_bgimgs"); // grabs list of trip related bgimgs
-				var random_trip_pic = trip_pics[(Math.floor(Math.random() * trip_pics.length))]; 
-
-				html.style.background = 'url(' + random_trip_pic + ') no-repeat center center fixed';
-				html.style.backgroundSize = 'cover';
-			}
-		}
-
-	</script>
+    window.addEventListener('scroll', updateScroll, {passive:true});
+    window.addEventListener('resize', updateScroll);
+    window.addEventListener('load', updateScroll);
+  </script>
 
 </head>
 
@@ -100,10 +103,10 @@
 </div><!--splash-->
 
 <ul id="nav">
-<li><a onclick="nav_onclick()" href="#detroit">DETROIT</a></li>
-<li><a onclick="nav_onclick()" href="#clifftop">CLIFFTOP</a></li>
-<li><a onclick="nav_onclick()" href="#la">LOS ANGELAS</a></li>
-<li><a onclick="nav_onclick()" href="#orlando">ORLANDO</a></li>
+<li><a onclick="nav_onclick(event)" href="#detroit">DETROIT</a></li>
+<li><a onclick="nav_onclick(event)" href="#clifftop">CLIFFTOP</a></li>
+<li><a onclick="nav_onclick(event)" href="#la">LOS ANGELAS</a></li>
+<li><a onclick="nav_onclick(event)" href="#orlando">ORLANDO</a></li>
 <li onclick="scroll(0,0)"><a href="">TO MAP</a></li>
 </ul>
 
