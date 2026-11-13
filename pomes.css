@@ -1,12 +1,21 @@
 html { background: transparent; }
-
-body {
-  background-image: url("media/detroit/detroit6.jpg");
+body { background: transparent; }
+.photo-backdrop {
+  position: fixed;
+  inset: 0;
   background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
+  background-position: center;
   background-size: cover;
+  opacity: 0;
+  transition: opacity 900ms ease-in-out;
+  pointer-events: none;
+  z-index: 0;
 }
+.photo-backdrop.is-visible { opacity: 1; }
+#splash, #nav, #content { position: relative; z-index: 1; }
+/* Prevent the general image rule from enlarging map tiles and markers. */
+.leaflet-container img { width: auto; max-width: none; }
+#map-canvas { overflow: hidden; isolation: isolate; }
 
 body {
 	padding:0;
@@ -79,7 +88,7 @@ ul#nav {
 	color:black;
 }
 
-audio, img {
+audio, .pome img {
 	width:100%;
 }
 
