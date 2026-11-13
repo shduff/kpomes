@@ -155,42 +155,7 @@ audio, .pome img {
 
 
 
-/* Local Leaflet layout fallback: keeps the map usable if CDN CSS is blocked.
-   Leaflet's JS positions panes and tiles; these rules establish their containing boxes. */
-#map-canvas.leaflet-container {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  background: #d9e8e7;
-  z-index: 0;
-}
-.leaflet-pane, .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow,
-.leaflet-tile-container, .leaflet-pane > svg, .leaflet-pane > canvas {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-.leaflet-pane { z-index: 400; }
-.leaflet-tile-pane { z-index: 200; }
-.leaflet-overlay-pane { z-index: 400; }
-.leaflet-shadow-pane { z-index: 500; }
-.leaflet-marker-pane { z-index: 600; }
-.leaflet-tooltip-pane { z-index: 650; }
-.leaflet-popup-pane { z-index: 700; }
-.leaflet-map-pane, .leaflet-tile-pane, .leaflet-overlay-pane,
-.leaflet-shadow-pane, .leaflet-marker-pane, .leaflet-tooltip-pane,
-.leaflet-popup-pane { position: absolute; left: 0; top: 0; }
-.leaflet-tile { width: 256px; height: 256px; border: 0; max-width: none; max-height: none; }
-.leaflet-container .leaflet-tile, .leaflet-container .leaflet-marker-icon,
-.leaflet-container .leaflet-marker-shadow { width: auto; max-width: none; }
-.leaflet-container .leaflet-tile { width: 256px; height: 256px; }
-.leaflet-container img { max-width: none !important; }
-.leaflet-container .leaflet-marker-icon { width: 32px; height: 32px; }
-.leaflet-container .leaflet-control-container { position: relative; z-index: 800; }
-.leaflet-bottom { position: absolute; bottom: 0; }
-.leaflet-right { position: absolute; right: 0; }
-.leaflet-control-attribution { background: rgba(255,255,255,.8); font-size: 11px; padding: 2px 5px; }
-.leaflet-control-attribution a { color: #175b7d; }
-.leaflet-tooltip { position: absolute; background: white; padding: 4px 8px; border: 1px solid #bbb; white-space: nowrap; }
-#splash { position: relative; overflow: hidden; }
+/* Map stays inside the splash, with Leaflet's own stylesheet controlling tiles. */
+#map-canvas { overflow: hidden; }
+#splash { overflow: hidden; }
 #splash .site-title { z-index: 900; pointer-events: none; }
