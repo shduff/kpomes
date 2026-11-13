@@ -40,6 +40,7 @@
     const locations = ['detroit','clifftop','la','orlando'];
     let activeLocation = null;
     let activePhoto = null;
+    let visibleLayer = 0;
 
     function choosePhoto(location, rotate) {
       const photos = locationPhotos[location];
@@ -54,7 +55,12 @@
       preload.onload = function () {
         // Don't let an older, slower photo overwrite the newly selected location.
         if (activeLocation === location && activePhoto === next) {
-          document.body.style.backgroundImage = 'url("' + next + '")';
+          const layers = document.querySelectorAll('.photo-backdrop');
+          const nextLayer = 1 - visibleLayer;
+          layers[nextLayer].style.backgroundImage = 'url("' + next + '")';
+          layers[nextLayer].classList.add('is-visible');
+          layers[visibleLayer].classList.remove('is-visible');
+          visibleLayer = nextLayer;
         }
       };
       activeLocation = location;
@@ -94,6 +100,8 @@
 </head>
 
 <body>
+<div class="photo-backdrop is-visible" style="background-image:url('media/detroit/detroit6.jpg')" aria-hidden="true"></div>
+<div class="photo-backdrop" aria-hidden="true"></div>
 
 <div id="splash">
 <h1 class="site-title" id="site-title-pt1">while i was</h1> 
