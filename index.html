@@ -15,7 +15,12 @@
           maxZoom: 19,
           attribution: 'Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
         }).addTo(map);
-        var icon = L.icon({iconUrl:'media/map-marker1.png', iconSize:[32,32], iconAnchor:[16,32]});
+        var icon = L.divIcon({
+          className: 'explosion-marker',
+          html: '<img src="media/map-marker1.png" alt="" width="32" height="32">',
+          iconSize: [32,32],
+          iconAnchor: [16,16]
+        });
         [
           [42.333172,-83.044960,'Detroit, MI','#detroit'],
           [38.004111,-80.944114,'Clifftop, WV','#clifftop'],
