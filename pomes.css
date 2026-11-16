@@ -159,3 +159,30 @@ audio, .pome img {
 #map-canvas { overflow: hidden; }
 #splash { overflow: hidden; }
 #splash .site-title { z-index: 900; pointer-events: none; }
+
+/* Small, soft white halo to keep explosions visible over light satellite terrain. */
+.explosion-marker {
+  background: transparent;
+  border: 0;
+  overflow: visible;
+}
+.explosion-marker::before {
+  content: "";
+  position: absolute;
+  width: 31px;
+  height: 31px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.88);
+  filter: blur(6px);
+  pointer-events: none;
+}
+.explosion-marker img {
+  position: relative;
+  display: block;
+  width: 32px;
+  height: 32px;
+  max-width: none;
+}
