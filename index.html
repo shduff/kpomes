@@ -3,6 +3,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="While I Was Away Pomes — poems exchanged across Detroit, Clifftop, Los Angeles, and Orlando.">
 	<link rel='stylesheet' type="text/css" href="./pomes.css">
 
 <link rel="stylesheet" href="./leaflet.css">
@@ -10,7 +12,7 @@
     <script>
       function initialize() {
         var map = L.map('map-canvas', {scrollWheelZoom:false, zoomControl:false});
-        map.setView([39, -99], 5);
+        map.setView([39, -99], window.innerWidth < 650 ? 4 : 5);
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 19,
           attribution: 'Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
@@ -27,7 +29,7 @@
           [34.056915,-118.248311,'Los Angeles, CA','#la'],
           [28.539998,-81.370123,'Orlando, FL','#orlando']
         ].forEach(function(place) {
-          L.marker([place[0],place[1]], {icon:icon, title:place[2]})
+          L.marker([place[0],place[1]], {icon:icon, title:place[2], alt:place[2]})
             .addTo(map).bindTooltip(place[2]).on('click',function(){window.location.hash=place[3];});
         });
       }
@@ -111,19 +113,19 @@
 <div id="splash">
 <h1 class="site-title" id="site-title-pt1">while i was</h1> 
 <h1 class="site-title" id="site-title-pt2">away pomes</h1>
-<div id="map-canvas">
-</div> <!-- this is the google maps object -->
+<div id="map-canvas" role="region" aria-label="Map of poem locations">
+</div> <!-- Interactive satellite map -->
 </div><!--splash-->
 
-<ul id="nav">
+<nav aria-label="Poem locations"><ul id="nav">
 <li><a onclick="nav_onclick(event)" href="#detroit">DETROIT</a></li>
 <li><a onclick="nav_onclick(event)" href="#clifftop">CLIFFTOP</a></li>
-<li><a onclick="nav_onclick(event)" href="#la">LOS ANGELAS</a></li>
+<li><a onclick="nav_onclick(event)" href="#la">LOS ANGELES</a></li>
 <li><a onclick="nav_onclick(event)" href="#orlando">ORLANDO</a></li>
-<li onclick="scroll(0,0)"><a href="">TO MAP</a></li>
-</ul>
+<li><a href="#splash">TO MAP</a></li>
+</ul></nav>
 
-<div id="content">
+<main id="content">
 
 <div class="newtrip">
 <h1 id="detroit"><a href="#detroit">Detroit, MI</a></h1>
@@ -219,7 +221,7 @@ space between your upper lip and the boundary between tooth and gum
 
     it has been scattered by chance and not­chance, god and not­god to places from which i hope never to retrieve it
 
-<img src="media/detroit/detroit1.jpg">
+<img src="media/detroit/detroit1.jpg" loading="lazy" alt="Photograph accompanying a Detroit poem">
 
 </div>
 </div>
@@ -472,7 +474,7 @@ to lift you: over my shoulder, in my hands, on my back, whichever way to share t
 
 to enter you: through the mouth, the chest, the back, the bald space directly behind the ears, the ears, the eyelids half closed and fluttering, the belly, the recess made below the ribs when lying on the right side, in bits through the space between atoms, conceptually, intellectually, artistically, all
 
-<audio src="media/clifftop/audio/greasy coat square dance.mp3" controls>
+<audio src="media/clifftop/audio/greasy coat square dance.mp3" controls preload="none">
 <p>Your browser does not support the <code>audio</code> element.</p>
 </audio>
 <span class="audio-title">GREASY COAT @ MIDNIGHT SQUARE DANCE</span>
@@ -719,7 +721,7 @@ if I could choose only one organism
 for symbiosis, you are no contest, 
 even if you versus corpse plant
 
-<audio src="media/clifftop/audio/waterbound.mp3" controls>
+<audio src="media/clifftop/audio/waterbound.mp3" controls preload="none">
 <p>Your browser does not support the <code>audio</code> element.</p>
 </audio>
 <span class="audio-title">WATERBOUND BY BEADLE & FRIENDS</span>
@@ -820,7 +822,7 @@ become with us in it, how very fresh
 and new with sick, dope samesies
 crunk on the high we induce in eachother
 
-<audio src="media/clifftop/audio/ethereal banjo.mp3" controls>
+<audio src="media/clifftop/audio/ethereal banjo.mp3" controls preload="none">
 <p>Your browser does not support the <code>audio</code> element.</p>
 </audio>
 <span class="audio-title">ETHEREAL BANJO</span>
@@ -871,7 +873,7 @@ across towns & now states
 when just knowing is
 everything & nearly enough
 
-<audio src="media/clifftop/audio/sunrise jam.mp3" controls>
+<audio src="media/clifftop/audio/sunrise jam.mp3" controls preload="none">
 <p>Your browser does not support the <code>audio</code> element.</p>
 </audio>
 <span class="audio-title">6AM SUNRISE JAM</span>
@@ -968,7 +970,7 @@ nine & square dancing and bodies and hands and spinning, stopping, stomping, jum
 
 midnight again & our harmonies legit hit heaven, touching the stars in ways that make the reserved blush and the alive come, touched by the vibrations of voices originating at the ridgeline from mouths sharing food and whiskey and ancient words of love, death, murder, chickens, trains, god, but actually, somehow, each one turns out to be about you.
 
-<audio src="media/clifftop/audio/say old man can you play the fiddle.mp3" controls>
+<audio src="media/clifftop/audio/say old man can you play the fiddle.mp3" controls preload="none">
 <p>Your browser does not support the <code>audio</code> element.</p>
 </audio>
 <span class="audio-title">SAY OLD MAN, CAN YOU PLAY THE FIDDLE</span>
@@ -1222,7 +1224,7 @@ before Paris,
 I tentatively told my mom who gave me the three golden rules I told you 
 in a lookout tower: leave the wife­-house, love the kids, trust the magic
 
-<audio src="media/clifftop/audio/dueling banjos and sleep sounds.mp3" controls>
+<audio src="media/clifftop/audio/dueling banjos and sleep sounds.mp3" controls preload="none">
 <p>Your browser does not support the <code>audio</code> element.</p>
 </audio>
 <span class="audio-title">DUELING BANJOS & SLEEP SOUNDS</span>
@@ -1328,7 +1330,7 @@ ask for him!
 ask for our who!
 ask now for our all own two!
 
-<audio src="media/clifftop/audio/peg and awl.mp3" controls>
+<audio src="media/clifftop/audio/peg and awl.mp3" controls preload="none">
 <p>Your browser does not support the <code>audio</code> element.</p>
 </audio>
 <span class="audio-title">PEG AND AWL</span>
@@ -1340,16 +1342,16 @@ ask now for our all own two!
 <div class="pome">
 (a poem in pictures)
 <div id="fungi-pome">
-<img class="fungi-pome" src="media/clifftop/fungi1.JPG">
-<img class="fungi-pome" src="media/clifftop/fungi2.JPG">
-<img class="fungi-pome" src="media/clifftop/fungi3.JPG">
-<img class="fungi-pome" src="media/clifftop/fungi4.JPG">
-<img class="fungi-pome" src="media/clifftop/fungi5.JPG">
-<img class="fungi-pome" src="media/clifftop/fungi6.JPG">
-<img class="fungi-pome" src="media/clifftop/fungi7.JPG">
-<img class="fungi-pome" src="media/clifftop/fungi8.JPG">
-<img class="fungi-pome" src="media/clifftop/fungi9.JPG">
-<img class="fungi-pome" src="media/clifftop/fungi10.JPG">
+<img class="fungi-pome" src="media/clifftop/fungi1.JPG" loading="lazy" alt="Fungi photograph accompanying a Clifftop poem">
+<img class="fungi-pome" src="media/clifftop/fungi2.JPG" loading="lazy" alt="Fungi photograph accompanying a Clifftop poem">
+<img class="fungi-pome" src="media/clifftop/fungi3.JPG" loading="lazy" alt="Fungi photograph accompanying a Clifftop poem">
+<img class="fungi-pome" src="media/clifftop/fungi4.JPG" loading="lazy" alt="Fungi photograph accompanying a Clifftop poem">
+<img class="fungi-pome" src="media/clifftop/fungi5.JPG" loading="lazy" alt="Fungi photograph accompanying a Clifftop poem">
+<img class="fungi-pome" src="media/clifftop/fungi6.JPG" loading="lazy" alt="Fungi photograph accompanying a Clifftop poem">
+<img class="fungi-pome" src="media/clifftop/fungi7.JPG" loading="lazy" alt="Fungi photograph accompanying a Clifftop poem">
+<img class="fungi-pome" src="media/clifftop/fungi8.JPG" loading="lazy" alt="Fungi photograph accompanying a Clifftop poem">
+<img class="fungi-pome" src="media/clifftop/fungi9.JPG" loading="lazy" alt="Fungi photograph accompanying a Clifftop poem">
+<img class="fungi-pome" src="media/clifftop/fungi10.JPG" loading="lazy" alt="Fungi photograph accompanying a Clifftop poem">
 </div>
 
 </div>
@@ -1754,7 +1756,7 @@ love you i love you too too too.
 </div><!-- newtrip -->
 
 
-</div> <!-- content -->
+</main> <!-- content -->
 
 </body>
 
