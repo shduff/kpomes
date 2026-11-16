@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Photographs from While I Was Away Pomes: Detroit, Clifftop, Los Angeles, Orlando, and fungi.">
+<title>Images — while i was away pomes</title>
+<link rel="stylesheet" href="./pomes.css">
+</head>
+<body class="archive-page">
+<nav class="page-nav" aria-label="Site pages"><a href="./">POEMS</a><a href="./images.html" aria-current="page">IMAGES</a><a href="./about.html">ABOUT</a></nav>
+<main class="archive-content">
+<h1 class="archive-heading">images</h1>
+<p class="archive-intro">photographs from detroit, clifftop, los angeles, orlando, and the fungi series</p>
+<div id="gallery" aria-label="Photo collections"></div>
+</main>
+<div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photograph viewer">
+  <div class="lightbox-bar"><span id="lightbox-position"></span><button type="button" id="lightbox-close" aria-label="Close image viewer">×</button></div>
+  <button type="button" id="lightbox-prev" class="lightbox-arrow" aria-label="Previous photograph">‹</button>
+  <figure class="lightbox-figure"><img id="lightbox-image" alt=""><figcaption id="lightbox-caption"></figcaption></figure>
+  <button type="button" id="lightbox-next" class="lightbox-arrow" aria-label="Next photograph">›</button>
+</div>
+<script>
+(async function () {
+  const gallery = document.getElementById('gallery');
+  const groups = [
+    ['Detroit','detroit',10],
+    ['Clifftop','clifftop',12],
+    ['Los Angeles','la',10],
+    ['Orlando','orlando',7],
+    ['Fungi','clifftop',10,'fungi']
+  ];
+  let descriptions;
+  try {
+    const response = await fetch('./photo-descriptions.json');
+    if (!response.ok) throw new Error('Descriptions unavailable');
+    descriptions = await response.json();
+  } catch (error) {
+    gallery.textContent = 'The photographs could not be loaded. Please try refreshing.';
+    return;
+  }
+  const imageList = [];
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const position = document.getElementById('lightbox-position');
+  let current = 0;
+  let previousFocus = null;
+  function show(index) {
+    current = (index + imageList.length) % imageList.length;
+    const photo = imageList[current];
+    lightboxImage.src = photo.path;
+    lightboxImage.alt = photo.alt;
+    lightboxCaption.textContent = photo.alt;
+    position.textContent = photo.group + ' · ' + photo.number + ' of ' + photo.total;
+  }
+  function open(index) {
+    previousFocus = document.activeElement;
+    show(index);
+    lightbox.hidden = false;
+    document.body.classList.add('lightbox-open');
+    document.getElementById('lightbox-close').focus();
+  }
+  function close() {
+    lightbox.hidden = true;
+    lightboxImage.removeAttribute('src');
+    document.body.classList.remove('lightbox-open');
+    if (previousFocus) previousFocus.focus();
+  }
+  document.getElementById('lightbox-close').addEventListener('click',close);
+  document.getElementById('lightbox-prev').addEventListener('click',()=>show(current-1));
+  document.getElementById('lightbox-next').addEventListener('click',()=>show(current+1));
+  lightbox.addEventListener('click',event=>{if(event.target===lightbox)close();});
+  document.addEventListener('keydown',event=>{
+    if(lightbox.hidden)return;
+    if(event.key==='Escape')close();
+    if(event.key==='ArrowLeft')show(current-1);
+    if(event.key==='ArrowRight')show(current+1);
+    if(event.key==='Tab'){
+      const controls=[document.getElementById('lightbox-close'),document.getElementById('lightbox-prev'),document.getElementById('lightbox-next')];
+      const first=controls[0],last=controls[controls.length-1];
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+    }
+  });
+  groups.forEach(([name,folder,count,prefix])=>{
+    const section=document.createElement('section');
+    section.className='gallery-section';
+    const header=document.createElement('div');
+    header.className='gallery-header';
+    const heading=document.createElement('h2');
+    heading.textContent=name;
+    const total=document.createElement('span');
+    total.className='gallery-count';
+    total.textContent=count+' photographs';
+    const arrows=document.createElement('div');
+    arrows.className='gallery-arrows';
+    const prev=document.createElement('button');
+    prev.type='button';prev.textContent='‹';prev.setAttribute('aria-label','Scroll '+name+' photographs left');
+    const next=document.createElement('button');
+    next.type='button';next.textContent='›';next.setAttribute('aria-label','Scroll '+name+' photographs right');
+    arrows.append(prev,next);header.append(heading,total,arrows);
+    const strip=document.createElement('div');
+    strip.className='gallery-strip';
+    strip.setAttribute('aria-label',name+' photographs');
+    for(let i=1;i<=count;i++){
+      const filename=(prefix||folder)+i+(folder==='detroit'&&i<=6?'.jpg':'.JPG');
+      const path='media/'+folder+'/'+filename;
+      const alt=descriptions[path]||name+' photograph '+i;
+      const index=imageList.push({path,alt,group:name,number:i,total:count})-1;
+      const button=document.createElement('button');
+      button.type='button';button.className='gallery-photo';button.setAttribute('aria-label','Open '+name+' photograph '+i+': '+alt);
+      const img=document.createElement('img');
+      img.src=path;img.alt='';img.loading='lazy';img.decoding='async';
+      button.append(img);
+      button.addEventListener('click',()=>open(index));
+      strip.append(button);
+    }
+    function scrollStrip(direction){strip.scrollBy({left:direction*strip.clientWidth*.8,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
+    prev.addEventListener('click',()=>scrollStrip(-1));
+    next.addEventListener('click',()=>scrollStrip(1));
+    section.append(header,strip);gallery.append(section);
+  });
+})();
+</script>
+</body>
+</html>
