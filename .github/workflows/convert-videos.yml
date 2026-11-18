@@ -31,17 +31,15 @@ jobs:
             test -s "$output"
             ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1 "$output"
           done
-      - name: Generate video poster thumbnails
+      - name: Generate poster thumbnails from converted MP4s
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p media/optimized/posters/clifftop media/optimized/posters/la
-          for input in media/clifftop/flatfoot1.MOV media/clifftop/flatfoot2.MOV media/la/la.MOV; do
-            name="${input#media/}"
-            output="media/optimized/posters/${name%.MOV}.jpg"
-            ffmpeg -hide_banner -loglevel error -y -ss 1 -i "$input" \
-              -frames:v 1 -vf 'scale=960:-2:force_original_aspect_ratio=decrease:force_divisible_by=2' \
-              -q:v 3 "$output"
+          for input in media/optimized/video/clifftop/flatfoot1.mp4 media/optimized/video/clifftop/flatfoot2.mp4 media/optimized/video/la/la.mp4; do
+            relative="${input#media/optimized/video/}"
+            output="media/optimized/posters/${relative%.mp4}.jpg"
+            mkdir -p "$(dirname "$output")"
+            ffmpeg -hide_banner -loglevel error -y -ss 00:00:01 -i "$input" -frames:v 1 -q:v 3 "$output"
             test -s "$output"
           done
       - name: Commit converted copies
