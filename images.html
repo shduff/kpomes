@@ -11,8 +11,9 @@
 <nav class="page-nav" aria-label="Site pages"><a class="site-home" href="./">while i was away</a><span class="page-nav-links"><a href="./">pomes</a><a href="./images.html" aria-current="page">images</a><a href="./about.html">about</a></span></nav>
 <main class="archive-content">
 <h1 class="archive-heading">images & sounds</h1>
+<nav class="archive-jump" aria-label="jump to media"><a href="#recordings">recordings</a><a href="#videos">videos</a></nav>
 <div id="gallery" aria-label="Photo collections"></div>
-<section class="sounds-section" aria-label="Recordings and videos"><h2>recordings</h2><div id="recordings"><div class="sound-item"><div>dueling banjos and sleep sounds</div><audio controls preload="none" src="media/clifftop/audio/dueling%20banjos%20and%20sleep%20sounds.mp3"></audio></div>
+<section class="sounds-section" aria-label="Recordings and videos"><h2 id="recordings">recordings</h2><div class="recordings-grid"><div class="sound-item"><div>dueling banjos and sleep sounds</div><audio controls preload="none" src="media/clifftop/audio/dueling%20banjos%20and%20sleep%20sounds.mp3"></audio></div>
 <div class="sound-item"><div>ethereal banjo</div><audio controls preload="none" src="media/clifftop/audio/ethereal%20banjo.mp3"></audio></div>
 <div class="sound-item"><div>fly away pretty little miss</div><audio controls preload="none" src="media/clifftop/audio/fly%20away%20pretty%20little%20miss.mp3"></audio></div>
 <div class="sound-item"><div>greasy coat square dance</div><audio controls preload="none" src="media/clifftop/audio/greasy%20coat%20square%20dance.mp3"></audio></div>
@@ -20,7 +21,7 @@
 <div class="sound-item"><div>perfect banjo evening</div><audio controls preload="none" src="media/clifftop/audio/perfect%20banjo%20evening.mp3"></audio></div>
 <div class="sound-item"><div>say old man can you play the fiddle</div><audio controls preload="none" src="media/clifftop/audio/say%20old%20man%20can%20you%20play%20the%20fiddle.mp3"></audio></div>
 <div class="sound-item"><div>sunrise jam</div><audio controls preload="none" src="media/clifftop/audio/sunrise%20jam.mp3"></audio></div>
-<div class="sound-item"><div>waterbound</div><audio controls preload="none" src="media/clifftop/audio/waterbound.mp3"></audio></div></div><h2>videos</h2><div id="videos"></div></section>
+<div class="sound-item"><div>waterbound</div><audio controls preload="none" src="media/clifftop/audio/waterbound.mp3"></audio></div></div><h2 id="videos">videos</h2><div class="videos-grid"></div></section>
 </main>
 <div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photograph viewer">
   <div class="lightbox-bar"><span id="lightbox-position"></span><button type="button" id="lightbox-close" aria-label="Close image viewer">×</button></div>
@@ -44,7 +45,7 @@
     if (!response.ok) throw new Error('Descriptions unavailable');
     descriptions = await response.json();
   } catch (error) {
-    gallery.textContent = 'The photographs could not be loaded. Please try refreshing.';
+    gallery.textContent = 'the photographs could not be loaded. please try refreshing.';
     return;
   }
   const imageList = [];
@@ -127,13 +128,13 @@
     section.append(header,strip);gallery.append(section);
   });
   const videos=[['Clifftop — flatfoot 1','media/clifftop/flatfoot1.MOV'],['Clifftop — flatfoot 2','media/clifftop/flatfoot2.MOV'],['Los Angeles','media/la/la.MOV']];
-  const videoContainer=document.getElementById('videos');
+  const videoContainer=document.querySelector('.videos-grid');
   videos.forEach(([label,path])=>{
     const item=document.createElement('div');item.className='video-item';
     const heading=document.createElement('h3');heading.textContent=label.toLowerCase();
     const video=document.createElement('video');video.controls=true;video.preload='none';video.playsInline=true;
     const source=document.createElement('source');source.src=path;source.type='video/quicktime';video.append(source);
-    const fallback=document.createElement('a');fallback.href=path;fallback.textContent='Open original video';
+    const fallback=document.createElement('a');fallback.href=path;fallback.textContent='open original video';
     item.append(heading,video,fallback);videoContainer.append(item);
   });
 })();
