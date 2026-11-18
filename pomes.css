@@ -332,3 +332,9 @@ html { scroll-padding-top: 118px; }
 .recordings-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,300px),1fr)); gap: 18px 26px; }
 .videos-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,330px),1fr)); gap: 24px; }
 #recordings, #videos { scroll-margin-top: 84px; }
+
+/* Sights & sounds hierarchy and sticky-header anchor clearance. */
+.archive-section-heading { font-size: 34px; font-weight: normal; padding: 0; margin: 22px 0 16px; }
+#photos, #recordings, #videos, .gallery-section { scroll-margin-top: 84px; }
+.photos-section { margin-top: 10px; }
+.photos-section .gallery-section { padding-top: 10px; }
