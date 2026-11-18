@@ -77,10 +77,17 @@
 
     function updateScroll() {
       const sections = Array.from(document.querySelectorAll('.newtrip'));
-      const position = window.innerHeight / 3;
+      const navHeight = document.querySelector('.page-nav').offsetHeight + document.querySelector('.location-nav').offsetHeight;
+      const position = navHeight + 32;
       const current = sections.findIndex(section => {
         const rect = section.getBoundingClientRect();
         return rect.top <= position && rect.bottom > position;
+      });
+      const active = current >= 0 ? locations[current] : null;
+      document.querySelectorAll('.location-nav a').forEach(link => {
+        const selected = link.getAttribute('href') === (active ? '#' + active : '#splash');
+        if (selected) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
       });
       if (current >= 0 && activeLocation !== locations[current]) {
         choosePhoto(locations[current], false);
@@ -96,6 +103,7 @@
     window.addEventListener('scroll', updateScroll, {passive:true});
     window.addEventListener('resize', updateScroll);
     window.addEventListener('load', updateScroll);
+    window.addEventListener('hashchange', () => requestAnimationFrame(updateScroll));
   </script>
 
 </head>
