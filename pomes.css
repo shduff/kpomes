@@ -395,3 +395,5 @@ body.archive-page:has(.about-letter) {
   .about-letter { padding: 20px; font-size: 18px; }
   .about-letter .about-quote { margin-left: 14px; }
 }
+
+.about-letter .letter-postscript { margin: 30px 0 0; font-size: .88em; line-height: 1.5; }
