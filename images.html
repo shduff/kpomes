@@ -96,7 +96,7 @@
     prev.type='button';prev.textContent='‹';prev.setAttribute('aria-label','Scroll '+name+' photographs left');
     const next=document.createElement('button');
     next.type='button';next.textContent='›';next.setAttribute('aria-label','Scroll '+name+' photographs right');
-    arrows.append(prev,next);header.append(heading,total,arrows);
+    arrows.append(prev,next);header.append(heading,arrows);
     const strip=document.createElement('div');
     strip.className='gallery-strip';
     strip.setAttribute('aria-label',name+' photographs');
@@ -126,7 +126,7 @@
   const recordingsContainer=document.getElementById('recordings');
   recordings.forEach(filename=>{
     const item=document.createElement('div');item.className='sound-item';
-    const label=document.createElement('div');label.textContent=filename.replace(/\\.mp3$/i,'');
+    const label=document.createElement('div');label.textContent=filename.replace(/\.mp3$/i,'');
     const audio=document.createElement('audio');audio.controls=true;audio.preload='none';
     audio.src='media/clifftop/audio/'+encodeURIComponent(filename);
     item.append(label,audio);recordingsContainer.append(item);
