@@ -1,0 +1,42 @@
+name: Convert original videos to MP4
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/convert-videos.yml'
+permissions:
+  contents: write
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Convert videos without changing originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p media/optimized/video/clifftop media/optimized/video/la
+          for input in media/clifftop/flatfoot1.MOV media/clifftop/flatfoot2.MOV media/la/la.MOV; do
+            name="${input#media/}"
+            output="media/optimized/video/${name%.MOV}.mp4"
+            ffmpeg -hide_banner -loglevel error -y -i "$input" \
+              -map 0:v:0 -map '0:a:0?' -c:v libx264 -preset medium -crf 23 \
+              -pix_fmt yuv420p -vf 'scale=trunc(min(iw,1280)/2)*2:-2' \
+              -c:a aac -b:a 128k -movflags +faststart "$output"
+            test -s "$output"
+            ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1 "$output"
+          done
+      - name: Commit converted copies
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add media/optimized/video
+          if ! git diff --cached --quiet; then
+            git commit -m "Add browser-friendly MP4 video copies"
+            git push
+          fi
