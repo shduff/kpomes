@@ -233,8 +233,6 @@ a:focus-visible, .leaflet-marker-icon:focus-visible { outline: 3px solid #ff4500
 .location-nav { position: sticky; top: var(--site-nav-height); z-index: 4900; background: #fff; }
 #nav { position: static !important; top: auto !important; z-index: auto; }
 #content, #splash { z-index: 1; }
-html { scroll-padding-top: 118px; }
-.newtrip > h1[id] { scroll-margin-top: 118px; }
 .page-nav a:focus-visible, .gallery-photo:focus-visible, .lightbox button:focus-visible, .archive-jump a:focus-visible {
  outline: 3px solid #ff4500; outline-offset: 3px;
 }
@@ -252,19 +250,20 @@ html { scroll-padding-top: 118px; }
 .gallery-header { display: flex; align-items: center; margin-bottom: 12px; }
 .gallery-header h2 { font-size: clamp(19px,2.1vw,24px); padding: 0; margin: 0; font-weight: normal; }
 
-/* True uneven photo mosaic: scaled down, never cropped or stretched. */
-.gallery-mosaic { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; width: 100%; }
-.mosaic-column { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+/* Height-balanced mosaic: JavaScript assigns each photograph to a column. */
+.gallery-mosaic { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; width: 100%; align-items: start; }
+.gallery-mosaic .mosaic-column { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .gallery-mosaic .gallery-photo {
- display: block; flex: 0 0 auto; width: 100%; height: auto; min-height: 0;
- max-height: none; aspect-ratio: auto; margin: 0; padding: 0; border: 0;
- background: transparent; cursor: zoom-in; overflow: visible;
+ display: block; flex: 0 0 auto; width: 100%; height: auto; margin: 0; padding: 0;
+ border: 0; background: transparent; cursor: zoom-in; overflow: visible;
 }
-.gallery-mosaic .gallery-photo img {
- display: block; width: 100%; max-width: 100%; height: auto; max-height: none;
- object-fit: contain; aspect-ratio: auto;
-}
+.gallery-mosaic .gallery-photo img { display: block; width: 100%; height: auto; object-fit: contain; }
 .gallery-mosaic .gallery-photo:hover img { filter: brightness(.93); }
+@media (max-width:900px) { .gallery-mosaic { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+@media (max-width:600px) {
+ .gallery-mosaic { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+ .gallery-mosaic .mosaic-column { gap: 8px; }
+}
 
 /* Image lightbox. */
 .lightbox[hidden] { display: none; }
@@ -296,63 +295,20 @@ html { scroll-padding-top: 118px; }
 .about-content { max-width: 700px; margin: 0 auto; padding: 70px 24px; line-height: 1.65; }
 .about-link { text-decoration: underline; text-underline-offset: 4px; }
 
-@media (max-width: 700px) {
- .gallery-mosaic { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
- .mosaic-column { gap: 8px; }
- /* All four original columns remain visible in document order; stack them into two grid tracks. */
-}
 @media (max-width: 600px) {
  :root { --site-nav-height: 54px; }
  .page-nav { padding: 10px 12px; gap: 8px; }
  .site-home { font-size: 13px; }
  .page-nav-links { gap: 11px; }
  .page-nav-links a { font-size: 12px; letter-spacing: 0; }
- html { scroll-padding-top: 148px; }
- .newtrip > h1[id] { scroll-margin-top: 148px; }
  .archive-content { padding-top: 24px; }
  .lightbox { grid-template-columns: 44px 1fr 44px; }
  .lightbox-figure img { max-height: 65vh; }
  .lightbox-figure figcaption { font-size: 13px; }
 }
 
-/* Balance each photo collection into the shortest practical set of columns. */
-.gallery-mosaic {
-  display: block;
-  columns: 4;
-  column-gap: 12px;
-  column-fill: balance;
-}
-.gallery-mosaic .gallery-photo {
-  display: inline-block;
-  vertical-align: top;
-  width: 100%;
-  margin: 0 0 12px;
-  break-inside: avoid;
-  -webkit-column-break-inside: avoid;
-}
-.gallery-mosaic .gallery-photo img { width: 100%; height: auto; display: block; }
-@media (max-width: 900px) { .gallery-mosaic { columns: 3; } }
-@media (max-width: 600px) {
- .gallery-mosaic { columns: 2; column-gap: 8px; }
- .gallery-mosaic .gallery-photo { margin-bottom: 8px; }
-}
-
-/* Height-balanced masonry: JS assigns photos to the shortest column.
-   These grid rules override the earlier CSS multi-column layout. */
-.gallery-mosaic { display: grid; columns: initial; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; align-items: start; }
-.gallery-mosaic .mosaic-column { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
-.gallery-mosaic .gallery-photo { display: block; width: 100%; height: auto; margin: 0; break-inside: auto; }
-.gallery-mosaic .gallery-photo img { display: block; width: 100%; height: auto; max-width: 100%; object-fit: contain; }
-@media (max-width:900px) { .gallery-mosaic { grid-template-columns: repeat(3,minmax(0,1fr)); } }
-@media (max-width:600px) {
- .gallery-mosaic { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
- .gallery-mosaic .mosaic-column { gap: 8px; }
-}
-
 /* Shared visual language: original Helvetica navigation, orange headings,
    photographic backdrops, and simple translucent white reading surfaces. */
-:root { --pomes-orange: #ff4500; --pomes-paper: rgba(255,255,255,.76); }
-.archive-heading { color: var(--pomes-orange); }
 .about-content { max-width: 760px; margin: 0 auto; padding: 38px 20px 90px; }
 body.archive-page:has(.about-letter) {
   background: #536048 url('./media/clifftop/fungi1.JPG') center center / cover fixed no-repeat;
@@ -368,11 +324,6 @@ body.archive-page:has(.about-letter) {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 19px;
   line-height: 1.65;
-}
-.about-letter .archive-heading {
-  margin: 0 0 28px;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: normal;
 }
 .about-letter p { margin: 24px 0; line-height: inherit; }
 .about-letter .letter-greeting { margin: 12px 0 28px; font-size: 21px; }
@@ -415,7 +366,6 @@ body.archive-page:has(.about-letter) {
 }
 .page-nav a[aria-current="page"] { border-bottom-color: var(--pomes-sage); }
 .page-nav a:hover, .archive-jump a:hover { color: var(--pomes-sage); }
-.about-letter { background: var(--pomes-paper); }
 .about-letter .letter-greeting { margin-top: 0; }
 
 /* Secondary poem-location navigation should read as subordinate to main navigation. */
