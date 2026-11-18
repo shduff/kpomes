@@ -338,3 +338,6 @@ html { scroll-padding-top: 118px; }
 #photos, #recordings, #videos, .gallery-section { scroll-margin-top: 84px; }
 .photos-section { margin-top: 10px; }
 .photos-section .gallery-section { padding-top: 10px; }
+
+/* City labels subordinate to the photos / recordings / videos headings. */
+.gallery-header h2 { font-size: clamp(19px, 2.1vw, 24px); }
