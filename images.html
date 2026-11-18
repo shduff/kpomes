@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="photographs, recordings, and videos from while i was away pomes.">
-<title>images & sounds — while i was away pomes</title>
+<title>sights & sounds — while i was away pomes</title>
 <link rel="stylesheet" href="./pomes.css">
 </head>
 <body class="archive-page">
-<nav class="page-nav" aria-label="Site pages"><a class="site-home" href="./">while i was away</a><span class="page-nav-links"><a href="./">pomes</a><a href="./images.html" aria-current="page">images</a><a href="./about.html">about</a></span></nav>
+<nav class="page-nav" aria-label="Site pages"><a class="site-home" href="./">while i was away</a><span class="page-nav-links"><a href="./">pomes</a><a href="./images.html" aria-current="page">sights & sounds</a><a href="./about.html">about</a></span></nav>
 <main class="archive-content">
-<h1 class="archive-heading">images & sounds</h1>
-<nav class="archive-jump" aria-label="jump to media"><a href="#recordings">recordings</a><a href="#videos">videos</a></nav>
-<div id="gallery" aria-label="Photo collections"></div>
+<h1 class="archive-heading">sights & sounds</h1>
+<nav class="archive-jump" aria-label="jump to media"><a href="#photos">photos</a><a href="#recordings">recordings</a><a href="#videos">videos</a></nav>
+<section class="photos-section" aria-labelledby="photos"><h2 id="photos" class="archive-section-heading">photos</h2><div id="gallery" aria-label="photo collections"></div></section>
 <section class="sounds-section" aria-label="Recordings and videos"><h2 id="recordings">recordings</h2><div class="recordings-grid"><div class="sound-item"><div>dueling banjos and sleep sounds</div><audio controls preload="none" src="media/clifftop/audio/dueling%20banjos%20and%20sleep%20sounds.mp3"></audio></div>
 <div class="sound-item"><div>ethereal banjo</div><audio controls preload="none" src="media/clifftop/audio/ethereal%20banjo.mp3"></audio></div>
 <div class="sound-item"><div>fly away pretty little miss</div><audio controls preload="none" src="media/clifftop/audio/fly%20away%20pretty%20little%20miss.mp3"></audio></div>
@@ -95,6 +95,7 @@
   groups.forEach(([name,folder,count,prefix])=>{
     const section=document.createElement('section');
     section.className='gallery-section';
+    section.id=(prefix||folder)==='fungi'?'fungi':folder;
     const header=document.createElement('div');
     header.className='gallery-header';
     const heading=document.createElement('h2');
