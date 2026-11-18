@@ -480,3 +480,15 @@ body.archive-page:has(.about-letter) {
     white-space: nowrap;
   }
 }
+
+/* Video previews: visible photographic frame instead of a blank black box. */
+.video-item video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #171717;
+  cursor: pointer;
+}
