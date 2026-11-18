@@ -60,12 +60,13 @@
       const next = 'media/' + location + '/' + choices[Math.floor(Math.random() * choices.length)];
       if (next === activePhoto) return;
       const preload = new Image();
+      const optimized = next.replace('media/', 'media/optimized/background/').replace(/\.[^.]+$/, '.webp');
       preload.onload = function () {
         // Don't let an older, slower photo overwrite the newly selected location.
         if (activeLocation === location && activePhoto === next) {
           const layers = document.querySelectorAll('.photo-backdrop');
           const nextLayer = 1 - visibleLayer;
-          layers[nextLayer].style.backgroundImage = 'url("' + next + '")';
+          layers[nextLayer].style.backgroundImage = 'url("' + preload.src + '")';
           layers[nextLayer].classList.add('is-visible');
           layers[visibleLayer].classList.remove('is-visible');
           visibleLayer = nextLayer;
@@ -73,7 +74,8 @@
       };
       activeLocation = location;
       activePhoto = next;
-      preload.src = next;
+      preload.onerror = function () { preload.onerror = null; preload.src = next; };
+      preload.src = optimized;
     }
 
     function updateScroll() {
@@ -120,7 +122,7 @@
 
 <body>
 <nav class="page-nav" aria-label="Site pages"><a class="site-home" href="./">while i was away</a><span class="page-nav-links"><a href="./" aria-current="page">pomes</a><a href="./images.html">sights & sounds</a><a href="./about.html">about</a></span></nav>
-<div class="photo-backdrop is-visible" style="background-image:url('media/detroit/detroit6.jpg')" aria-hidden="true"></div>
+<div class="photo-backdrop is-visible" style="background-image:url('media/optimized/background/detroit/detroit6.webp')" aria-hidden="true"></div>
 <div class="photo-backdrop" aria-hidden="true"></div>
 
 <div id="splash">
