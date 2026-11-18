@@ -104,6 +104,7 @@
     const strip=document.createElement('div');
     strip.className='gallery-mosaic';
     strip.setAttribute('aria-label',name+' photographs');
+    const photos=[];
     for(let i=1;i<=count;i++){
       const filename=(prefix||folder)+i+(folder==='detroit'&&i<=6?'.jpg':'.JPG');
       const path='media/'+folder+'/'+filename;
@@ -116,8 +117,51 @@
       button.append(img);
       button.addEventListener('click',()=>open(index));
       strip.append(button);
+      photos.push({button,img,order:i-1});
     }
     section.append(header,strip);gallery.append(section);
+    // Place each image into the shortest column, using its actual aspect ratio.
+    // Recalculate as images load and when the number of columns changes.
+    let lastColumns=0;
+    function balance() {
+      const columnCount=window.innerWidth<=600?2:window.innerWidth<=900?3:4;
+      const width=strip.clientWidth;
+      if (!width) return;
+      const gap=columnCount===2?8:12;
+      const colWidth=(width-gap*(columnCount-1))/columnCount;
+      const heights=Array(columnCount).fill(0);
+      const columns=Array.from({length:columnCount},()=>{
+        const col=document.createElement('div');
+        col.className='mosaic-column';
+        return col;
+      });
+      // Largest/tallest photos first prevents one long image from extending
+      // a column far below the rest; preserve original sequence in lightbox.
+      const ordered=photos.slice().sort((a,b)=>{
+        const ratio=p=>p.img.naturalWidth&&p.img.naturalHeight?p.img.naturalHeight/p.img.naturalWidth:1;
+        return ratio(b)-ratio(a)||a.order-b.order;
+      });
+      ordered.forEach(photo=>{
+        let target=heights.indexOf(Math.min(...heights));
+        columns[target].append(photo.button);
+        const ratio=photo.img.naturalWidth&&photo.img.naturalHeight?photo.img.naturalHeight/photo.img.naturalWidth:1;
+        heights[target]+=colWidth*ratio+gap;
+      });
+      strip.replaceChildren(...columns);
+      lastColumns=columnCount;
+    }
+    let scheduled=false;
+    function queueBalance(){
+      if(scheduled)return;
+      scheduled=true;
+      requestAnimationFrame(()=>{scheduled=false;balance();});
+    }
+    photos.forEach(photo=>photo.img.addEventListener('load',queueBalance,{once:true}));
+    balance();
+    window.addEventListener('resize',()=>{
+      const next=window.innerWidth<=600?2:window.innerWidth<=900?3:4;
+      if(next!==lastColumns)queueBalance();
+    });
   });
   const videos=[['Clifftop — flatfoot 1','media/clifftop/flatfoot1.MOV'],['Clifftop — flatfoot 2','media/clifftop/flatfoot2.MOV'],['Los Angeles','media/la/la.MOV']];
   const videoContainer=document.querySelector('.videos-grid');
