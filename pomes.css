@@ -349,42 +349,49 @@ html { scroll-padding-top: 118px; }
  .gallery-mosaic .mosaic-column { gap: 8px; }
 }
 
-/* Sanders quotations as pauses within the about-page narrative. */
-.about-content p { margin: 25px 0; }
-.about-quote {
-  margin: 34px 0 34px clamp(12px, 4vw, 38px);
-  padding: 0;
-  border: 0;
-  font: italic clamp(21px, 2.8vw, 28px)/1.45 Georgia, 'Times New Roman', serif;
-  color: #222;
-}
-
-/* About as a personal note, over an actual photograph from the archive. */
+/* Shared visual language: original Helvetica navigation, orange headings,
+   photographic backdrops, and simple translucent white reading surfaces. */
+:root { --pomes-orange: #ff4500; --pomes-paper: rgba(255,255,255,.76); }
+.archive-heading { color: var(--pomes-orange); }
+.about-content { max-width: 760px; margin: 0 auto; padding: 38px 20px 90px; }
 body.archive-page:has(.about-letter) {
   background: #536048 url('./media/clifftop/fungi1.JPG') center center / cover fixed no-repeat;
 }
-.about-content:has(.about-letter) {
-  max-width: 920px;
-  padding: clamp(24px,5vw,64px) 18px 90px;
-}
 .about-letter {
-  background: rgba(255,253,246,.93);
-  border-radius: 5px;
-  padding: clamp(28px,5.5vw,68px);
-  box-shadow: 0 12px 36px rgba(0,0,0,.14);
+  background: var(--pomes-paper);
+  padding: clamp(22px,4vw,42px);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: #111;
+  /* Serif experiment limited to the letter: leave original poems untouched. */
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 19px;
+  line-height: 1.65;
 }
-.about-letter .archive-heading { margin-bottom: 30px; }
-.about-letter p { line-height: 1.7; }
-.about-letter .letter-greeting { margin: 18px 0 30px; font-size: 21px; }
-.about-letter .letter-signoff { margin: 38px 0 0; line-height: 1.8; white-space: normal; }
+.about-letter .archive-heading {
+  margin: 0 0 28px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+.about-letter p { margin: 24px 0; line-height: inherit; }
+.about-letter .letter-greeting { margin: 12px 0 28px; font-size: 21px; }
+.about-letter .letter-signoff { margin: 36px 0 0; line-height: 1.6; }
 .about-letter .about-quote {
-  border-left: 5px solid #b36b58;
-  padding: 4px 0 4px clamp(16px,3vw,28px);
-  margin: 34px 0 34px clamp(5px,2vw,22px);
-  font: italic clamp(21px,2.8vw,28px)/1.45 Georgia,'Times New Roman',serif;
+  margin: 32px 0 32px clamp(16px,3vw,34px);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #111;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(22px,2.7vw,27px);
+  font-style: italic;
+  font-weight: normal;
+  line-height: 1.45;
 }
 @media (max-width:600px) {
   body.archive-page:has(.about-letter) { background-attachment: scroll; }
-  .about-letter { padding: 24px 20px; }
-  .about-letter .about-quote { margin-left: 0; }
+  .about-content { padding: 20px 12px 56px; }
+  .about-letter { padding: 20px; font-size: 18px; }
+  .about-letter .about-quote { margin-left: 14px; }
 }
