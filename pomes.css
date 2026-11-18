@@ -311,7 +311,7 @@ a:focus-visible, .leaflet-marker-icon:focus-visible { outline: 3px solid #ff4500
    photographic backdrops, and simple translucent white reading surfaces. */
 .about-content { max-width: 760px; margin: 0 auto; padding: 38px 20px 90px; }
 body.archive-page:has(.about-letter) {
-  background: #536048 url('./media/clifftop/fungi1.JPG') center center / cover fixed no-repeat;
+  background: #536048 url('./media/optimized/background/clifftop/fungi1.webp') center center / cover fixed no-repeat;
 }
 .about-letter {
   background: var(--pomes-paper);
