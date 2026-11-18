@@ -336,3 +336,15 @@ html { scroll-padding-top: 118px; }
  .gallery-mosaic { columns: 2; column-gap: 8px; }
  .gallery-mosaic .gallery-photo { margin-bottom: 8px; }
 }
+
+/* Height-balanced masonry: JS assigns photos to the shortest column.
+   These grid rules override the earlier CSS multi-column layout. */
+.gallery-mosaic { display: grid; columns: initial; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; align-items: start; }
+.gallery-mosaic .mosaic-column { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.gallery-mosaic .gallery-photo { display: block; width: 100%; height: auto; margin: 0; break-inside: auto; }
+.gallery-mosaic .gallery-photo img { display: block; width: 100%; height: auto; max-width: 100%; object-fit: contain; }
+@media (max-width:900px) { .gallery-mosaic { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+@media (max-width:600px) {
+ .gallery-mosaic { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+ .gallery-mosaic .mosaic-column { gap: 8px; }
+}
