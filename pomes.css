@@ -492,3 +492,18 @@ body.archive-page:has(.about-letter) {
   background: #171717;
   cursor: pointer;
 }
+
+/* Sights & sounds uses the same sticky secondary navigation as poems. */
+.archive-sticky-nav #nav {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  flex-wrap: nowrap;
+  width: 100%;
+}
+.archive-sticky-nav #nav li { float: none; width: 100%; min-width: 0; padding: 0; flex: none; }
+.archive-sticky-nav #nav a { display: block; width: 100%; text-align: center; }
+.archive-sticky-nav #nav a:hover { color: #304331; background: #e9eee5; }
+.archive-sticky-nav #nav a[aria-current="location"] { color: #304331; background: #dce5d6; font-weight: bold; }
+@media (hover:none) {
+  .archive-sticky-nav #nav a:hover:not([aria-current="location"]) { color: #111; background: transparent; }
+}
