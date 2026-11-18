@@ -9,9 +9,10 @@
 </head>
 <body class="archive-page">
 <nav class="page-nav" aria-label="Site pages"><a class="site-home" href="./">while i was away</a><span class="page-nav-links"><a href="./">pomes</a><a href="./images.html" aria-current="page">sights & sounds</a><a href="./about.html">about</a></span></nav>
+<nav class="location-nav archive-sticky-nav" aria-label="sights & sounds sections"><ul id="nav"><li><a href="#photos">photos</a></li><li><a href="#recordings">recordings</a></li><li><a href="#videos">videos</a></li></ul></nav>
 <main class="archive-content">
 <h1 class="archive-heading">sights & sounds</h1>
-<nav class="archive-jump" aria-label="jump to media"><a href="#photos">photos</a><a href="#recordings">recordings</a><a href="#videos">videos</a></nav>
+
 <section class="photos-section" aria-labelledby="photos"><h2 id="photos" class="archive-section-heading">photos</h2><div id="gallery" aria-label="photo collections"></div></section>
 <section class="sounds-section" aria-label="Recordings and videos"><h2 id="recordings">recordings</h2><div class="recordings-grid"><div class="sound-item"><div>dueling banjos and sleep sounds</div><audio controls preload="none" src="media/clifftop/audio/dueling%20banjos%20and%20sleep%20sounds.mp3"></audio></div>
 <div class="sound-item"><div>ethereal banjo</div><audio controls preload="none" src="media/clifftop/audio/ethereal%20banjo.mp3"></audio></div>
@@ -30,6 +31,38 @@
   <button type="button" id="lightbox-next" class="lightbox-arrow" aria-label="Next photograph">›</button>
 </div>
 <script>
+(function () {
+  const nav = document.querySelector('.archive-sticky-nav');
+  const links = Array.from(nav.querySelectorAll('a'));
+  const ids = ['photos','recordings','videos'];
+  function offset() {
+    return document.querySelector('.page-nav').getBoundingClientRect().height + nav.getBoundingClientRect().height + 8;
+  }
+  function updateActive() {
+    const threshold = offset() + 12;
+    let current = ids[0];
+    ids.forEach(id => {
+      const heading = document.getElementById(id);
+      if (heading && heading.getBoundingClientRect().top <= threshold) current = id;
+    });
+    links.forEach(link => {
+      if (link.hash === '#' + current) link.setAttribute('aria-current','location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+  links.forEach(link => link.addEventListener('click', event => {
+    const heading = document.getElementById(link.hash.slice(1));
+    if (!heading) return;
+    event.preventDefault();
+    history.pushState(null, '', link.hash);
+    window.scrollTo({top: window.scrollY + heading.getBoundingClientRect().top - offset(), behavior: 'instant'});
+    updateActive();
+  }));
+  window.addEventListener('scroll', updateActive, {passive:true});
+  window.addEventListener('resize', updateActive);
+  window.addEventListener('load', updateActive);
+  updateActive();
+})();
 (async function () {
   const gallery = document.getElementById('gallery');
   const groups = [
