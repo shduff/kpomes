@@ -3,16 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Photographs from While I Was Away Pomes: Detroit, Clifftop, Los Angeles, Orlando, and fungi.">
-<title>Images & Sounds — while i was away pomes</title>
+<meta name="description" content="photographs, recordings, and videos from while i was away pomes.">
+<title>images & sounds — while i was away pomes</title>
 <link rel="stylesheet" href="./pomes.css">
 </head>
 <body class="archive-page">
-<nav class="page-nav" aria-label="Site pages"><a class="site-home" href="./">while i was away</a><span class="page-nav-links"><a href="./">POMES</a><a href="./images.html" aria-current="page">IMAGES</a><a href="./about.html">ABOUT</a></span></nav>
+<nav class="page-nav" aria-label="Site pages"><a class="site-home" href="./">while i was away</a><span class="page-nav-links"><a href="./">pomes</a><a href="./images.html" aria-current="page">images</a><a href="./about.html">about</a></span></nav>
 <main class="archive-content">
 <h1 class="archive-heading">images & sounds</h1>
 <div id="gallery" aria-label="Photo collections"></div>
-<section class="sounds-section" aria-label="Recordings and videos"><h2>recordings</h2><div id="recordings"></div><h2>videos</h2><div id="videos"></div></section>
+<section class="sounds-section" aria-label="Recordings and videos"><h2>recordings</h2><div id="recordings"><div class="sound-item"><div>dueling banjos and sleep sounds</div><audio controls preload="none" src="media/clifftop/audio/dueling%20banjos%20and%20sleep%20sounds.mp3"></audio></div>
+<div class="sound-item"><div>ethereal banjo</div><audio controls preload="none" src="media/clifftop/audio/ethereal%20banjo.mp3"></audio></div>
+<div class="sound-item"><div>fly away pretty little miss</div><audio controls preload="none" src="media/clifftop/audio/fly%20away%20pretty%20little%20miss.mp3"></audio></div>
+<div class="sound-item"><div>greasy coat square dance</div><audio controls preload="none" src="media/clifftop/audio/greasy%20coat%20square%20dance.mp3"></audio></div>
+<div class="sound-item"><div>peg and awl</div><audio controls preload="none" src="media/clifftop/audio/peg%20and%20awl.mp3"></audio></div>
+<div class="sound-item"><div>perfect banjo evening</div><audio controls preload="none" src="media/clifftop/audio/perfect%20banjo%20evening.mp3"></audio></div>
+<div class="sound-item"><div>say old man can you play the fiddle</div><audio controls preload="none" src="media/clifftop/audio/say%20old%20man%20can%20you%20play%20the%20fiddle.mp3"></audio></div>
+<div class="sound-item"><div>sunrise jam</div><audio controls preload="none" src="media/clifftop/audio/sunrise%20jam.mp3"></audio></div>
+<div class="sound-item"><div>waterbound</div><audio controls preload="none" src="media/clifftop/audio/waterbound.mp3"></audio></div></div><h2>videos</h2><div id="videos"></div></section>
 </main>
 <div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photograph viewer">
   <div class="lightbox-bar"><span id="lightbox-position"></span><button type="button" id="lightbox-close" aria-label="Close image viewer">×</button></div>
@@ -89,7 +97,7 @@
     const header=document.createElement('div');
     header.className='gallery-header';
     const heading=document.createElement('h2');
-    heading.textContent=name;
+    heading.textContent=name.toLowerCase();
     const arrows=document.createElement('div');
     arrows.className='gallery-arrows';
     const prev=document.createElement('button');
@@ -118,24 +126,11 @@
     next.addEventListener('click',()=>scrollStrip(1));
     section.append(header,strip);gallery.append(section);
   });
-  const recordings = [
-    'dueling banjos and sleep sounds.mp3','ethereal banjo.mp3','fly away pretty little miss.mp3',
-    'greasy coat square dance.mp3','peg and awl.mp3','perfect banjo evening.mp3',
-    'say old man can you play the fiddle.mp3','sunrise jam.mp3','waterbound.mp3'
-  ];
-  const recordingsContainer=document.getElementById('recordings');
-  recordings.forEach(filename=>{
-    const item=document.createElement('div');item.className='sound-item';
-    const label=document.createElement('div');label.textContent=filename.replace(/\.mp3$/i,'');
-    const audio=document.createElement('audio');audio.controls=true;audio.preload='none';
-    audio.src='media/clifftop/audio/'+encodeURIComponent(filename);
-    item.append(label,audio);recordingsContainer.append(item);
-  });
   const videos=[['Clifftop — flatfoot 1','media/clifftop/flatfoot1.MOV'],['Clifftop — flatfoot 2','media/clifftop/flatfoot2.MOV'],['Los Angeles','media/la/la.MOV']];
   const videoContainer=document.getElementById('videos');
   videos.forEach(([label,path])=>{
     const item=document.createElement('div');item.className='video-item';
-    const heading=document.createElement('h3');heading.textContent=label;
+    const heading=document.createElement('h3');heading.textContent=label.toLowerCase();
     const video=document.createElement('video');video.controls=true;video.preload='none';video.playsInline=true;
     const source=document.createElement('source');source.src=path;source.type='video/quicktime';video.append(source);
     const fallback=document.createElement('a');fallback.href=path;fallback.textContent='Open original video';
