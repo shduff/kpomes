@@ -324,3 +324,11 @@ html { scroll-padding-top: 118px; }
  html { scroll-padding-top: 148px; }
  .newtrip > h1[id] { scroll-margin-top: 148px; }
 }
+
+/* Archive jump links and static media players. */
+.archive-jump { display: flex; gap: 22px; margin: 12px 0 24px; font-size: 15px; }
+.archive-jump a { text-decoration: underline; text-underline-offset: 4px; }
+.archive-jump a:focus-visible { outline: 3px solid #ff4500; outline-offset: 3px; }
+.recordings-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,300px),1fr)); gap: 18px 26px; }
+.videos-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,330px),1fr)); gap: 24px; }
+#recordings, #videos { scroll-margin-top: 84px; }
