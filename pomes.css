@@ -348,3 +348,13 @@ html { scroll-padding-top: 118px; }
  .gallery-mosaic { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
  .gallery-mosaic .mosaic-column { gap: 8px; }
 }
+
+/* Sanders quotations as pauses within the about-page narrative. */
+.about-content p { margin: 25px 0; }
+.about-quote {
+  margin: 34px 0 34px clamp(12px, 4vw, 38px);
+  padding: 0;
+  border: 0;
+  font: italic clamp(21px, 2.8vw, 28px)/1.45 Georgia, 'Times New Roman', serif;
+  color: #222;
+}
