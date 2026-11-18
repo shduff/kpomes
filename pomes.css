@@ -397,3 +397,23 @@ body.archive-page:has(.about-letter) {
 }
 
 .about-letter .letter-postscript { margin: 30px 0 0; font-size: .88em; line-height: 1.5; }
+
+/* Typography + palette: playful rounded headings, original orange, quiet sage.
+   Keep poem text and letter body in their existing typefaces. */
+:root {
+  --pomes-orange: #ff4500;
+  --pomes-sage: #75846c;
+  --pomes-paper: rgba(255,255,255,.76);
+  --pomes-display: 'Arial Rounded MT Bold', 'Trebuchet MS', Arial, sans-serif;
+}
+.page-nav, .page-nav a, .site-home, .page-nav-links,
+.location-nav, #nav, #nav a,
+.archive-heading, .archive-section-heading, .gallery-header h2,
+.sounds-section > h2, .archive-jump,
+.site-title, .newtrip > h1, .newtrip > h2 {
+  font-family: var(--pomes-display);
+}
+.page-nav a[aria-current="page"] { border-bottom-color: var(--pomes-sage); }
+.page-nav a:hover, .archive-jump a:hover { color: var(--pomes-sage); }
+.about-letter { background: var(--pomes-paper); }
+.about-letter .letter-greeting { margin-top: 0; }
