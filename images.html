@@ -104,7 +104,6 @@
     const strip=document.createElement('div');
     strip.className='gallery-mosaic';
     strip.setAttribute('aria-label',name+' photographs');
-    const columns=Array.from({length:4},()=>{const column=document.createElement('div');column.className='mosaic-column';strip.append(column);return column;});
     for(let i=1;i<=count;i++){
       const filename=(prefix||folder)+i+(folder==='detroit'&&i<=6?'.jpg':'.JPG');
       const path='media/'+folder+'/'+filename;
@@ -116,7 +115,7 @@
       img.src=path;img.alt='';img.loading='lazy';img.decoding='async';
       button.append(img);
       button.addEventListener('click',()=>open(index));
-      columns[(i-1)%columns.length].append(button);
+      strip.append(button);
     }
     section.append(header,strip);gallery.append(section);
   });
