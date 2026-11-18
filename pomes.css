@@ -470,3 +470,13 @@ body.archive-page:has(.about-letter) {
 @media (max-width:600px) {
   #map-canvas .leaflet-control-attribution { font-size: 8px; }
 }
+
+/* Compact map credit on narrow screens; retain visible Esri attribution. */
+@media (max-width: 600px) {
+  #map-canvas .leaflet-control-attribution {
+    font-size: 7px;
+    line-height: 1.1;
+    padding: 0 2px;
+    white-space: nowrap;
+  }
+}
