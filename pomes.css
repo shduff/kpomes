@@ -428,3 +428,30 @@ body.archive-page:has(.about-letter) {
   .location-nav #nav, .location-nav #nav a { font-size: 12px; }
   .location-nav #nav a { padding: 10px 3px; }
 }
+
+/* Secondary navigation interaction and city-anchor positioning. */
+.location-nav #nav a {
+  transition: color 120ms ease, background-color 120ms ease;
+}
+.location-nav #nav a:hover {
+  color: #304331;
+  background: #e9eee5;
+}
+.location-nav #nav a[aria-current="location"] {
+  color: #304331;
+  background: #dce5d6;
+  font-weight: bold;
+}
+.location-nav #nav a:focus-visible {
+  outline: 2px solid #75846c;
+  outline-offset: -2px;
+}
+/* City headings retain their original 80px top padding; subtract that
+   internal space from the anchor offset so the visible city name lands
+   immediately below both sticky navigation bars. */
+.newtrip > h1[id] {
+  scroll-margin-top: calc(var(--site-nav-height) + 44px - 80px);
+}
+@media (max-width: 600px) {
+  .newtrip > h1[id] { scroll-margin-top: calc(var(--site-nav-height) + 44px - 48px); }
+}
