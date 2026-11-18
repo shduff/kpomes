@@ -85,13 +85,7 @@
       if (current >= 0 && activeLocation !== locations[current]) {
         choosePhoto(locations[current], false);
       }
-      const map = document.getElementById('map-canvas');
-      const nav = document.getElementById('nav');
-      if (map && nav) {
-        const pastMap = map.getBoundingClientRect().bottom <= 0;
-        nav.style.position = pastMap ? 'fixed' : 'relative';
-        nav.style.top = pastMap ? '0' : '';
-      }
+
     }
 
     function nav_onclick(event) {
@@ -107,7 +101,7 @@
 </head>
 
 <body>
-<nav class="page-nav" aria-label="Site pages"><a href="./" aria-current="page">POEMS</a><a href="./images.html">IMAGES</a><a href="./about.html">ABOUT</a></nav>
+<nav class="page-nav" aria-label="Site pages"><a class="site-home" href="./">while i was away</a><span class="page-nav-links"><a href="./" aria-current="page">POMES</a><a href="./images.html">IMAGES</a><a href="./about.html">ABOUT</a></span></nav>
 <div class="photo-backdrop is-visible" style="background-image:url('media/detroit/detroit6.jpg')" aria-hidden="true"></div>
 <div class="photo-backdrop" aria-hidden="true"></div>
 
@@ -118,7 +112,7 @@
 </div> <!-- Interactive satellite map -->
 </div><!--splash-->
 
-<nav aria-label="Poem locations"><ul id="nav">
+<nav class="location-nav" aria-label="Poem locations"><ul id="nav">
 <li><a onclick="nav_onclick(event)" href="#detroit">DETROIT</a></li>
 <li><a onclick="nav_onclick(event)" href="#clifftop">CLIFFTOP</a></li>
 <li><a onclick="nav_onclick(event)" href="#la">LOS ANGELES</a></li>
