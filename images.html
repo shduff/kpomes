@@ -152,7 +152,9 @@
       const button=document.createElement('button');
       button.type='button';button.className='gallery-photo';button.setAttribute('aria-label','Open '+name+' photograph '+i+': '+alt);
       const img=document.createElement('img');
-      img.src=path;img.alt='';img.loading='lazy';img.decoding='async';
+      const thumb='media/optimized/thumb/'+folder+'/'+filename.replace(/\.[^.]+$/,'.webp');
+      img.src=thumb;img.alt='';img.loading='lazy';img.decoding='async';
+      img.onerror=()=>{img.onerror=null;img.src=path;};
       button.append(img);
       button.addEventListener('click',()=>open(index));
       strip.append(button);
