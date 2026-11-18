@@ -417,3 +417,14 @@ body.archive-page:has(.about-letter) {
 .page-nav a:hover, .archive-jump a:hover { color: var(--pomes-sage); }
 .about-letter { background: var(--pomes-paper); }
 .about-letter .letter-greeting { margin-top: 0; }
+
+/* Secondary poem-location navigation should read as subordinate to main navigation. */
+.location-nav #nav, .location-nav #nav a {
+  font-size: 14px;
+  line-height: 1.25;
+}
+.location-nav #nav a { padding: 10px 6px; }
+@media (max-width:600px) {
+  .location-nav #nav, .location-nav #nav a { font-size: 12px; }
+  .location-nav #nav a { padding: 10px 3px; }
+}
