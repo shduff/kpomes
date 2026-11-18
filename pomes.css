@@ -405,3 +405,28 @@ body.archive-page:has(.about-letter) {
 @media (max-width: 600px) {
   .newtrip > h1[id] { scroll-margin-top: calc(var(--site-nav-height) + 44px - 48px); }
 }
+
+/* Mobile refinements after device testing. */
+.lightbox-open { position: fixed; width: 100%; overflow: hidden; }
+.lightbox { touch-action: pan-y; overscroll-behavior: contain; }
+.about-letter .letter-postscript { font-size: 1em; }
+@media (hover: hover) and (pointer: fine) {
+  .location-nav #nav a:hover:not([aria-current="location"]) {
+    color: #304331; background: #e9eee5;
+  }
+}
+@media (hover: none) {
+  .location-nav #nav a:hover:not([aria-current="location"]) {
+    color: #111; background: transparent;
+  }
+}
+@media (max-width: 600px) {
+  #map-canvas { height: 43vh; min-height: 265px; }
+  #site-title-pt1 { top: 6%; }
+  #site-title-pt2 { top: 18%; }
+  .site-title { line-height: .92; }
+  .location-nav #nav { display: flex; flex-wrap: nowrap; }
+  .location-nav #nav li { flex: 1 1 0; min-width: 0; padding: 0; }
+  .location-nav #nav a { padding: 10px 1px; font-size: clamp(9px,2.5vw,12px); white-space: nowrap; }
+  .newtrip > h1[id] { scroll-margin-top: 0; }
+}
