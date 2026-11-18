@@ -209,7 +209,9 @@
   videos.forEach(([label,path])=>{
     const item=document.createElement('div');item.className='video-item';
     const heading=document.createElement('h3');heading.textContent=label.toLowerCase();
-    const video=document.createElement('video');video.controls=true;video.preload='none';video.playsInline=true;
+    const video=document.createElement('video');video.controls=true;video.preload='metadata';video.playsInline=true;
+    video.poster=path.replace('media/','media/optimized/posters/').replace(/\.MOV$/i,'.jpg');
+    video.setAttribute('aria-label','play '+label.toLowerCase());
     const mp4=path.replace('media/','media/optimized/video/').replace(/\.MOV$/i,'.mp4');
     const source=document.createElement('source');source.src=mp4;source.type='video/mp4';video.append(source);
     const original=document.createElement('source');original.src=path;original.type='video/quicktime';video.append(original);
