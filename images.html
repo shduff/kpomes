@@ -210,7 +210,9 @@
     const item=document.createElement('div');item.className='video-item';
     const heading=document.createElement('h3');heading.textContent=label.toLowerCase();
     const video=document.createElement('video');video.controls=true;video.preload='none';video.playsInline=true;
-    const source=document.createElement('source');source.src=path;source.type='video/quicktime';video.append(source);
+    const mp4=path.replace('media/','media/optimized/video/').replace(/\.MOV$/i,'.mp4');
+    const source=document.createElement('source');source.src=mp4;source.type='video/mp4';video.append(source);
+    const original=document.createElement('source');original.src=path;original.type='video/quicktime';video.append(original);
     const fallback=document.createElement('a');fallback.href=path;fallback.textContent='open original video';
     item.append(heading,video,fallback);videoContainer.append(item);
   });
