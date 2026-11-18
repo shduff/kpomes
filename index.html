@@ -12,7 +12,8 @@
     <script>
       function initialize() {
         var map = L.map('map-canvas', {scrollWheelZoom:false, zoomControl:false});
-        map.setView([39, -99], window.innerWidth < 650 ? 4 : 5);
+        const mapPlaces = [[42.333172,-83.044960],[38.004111,-80.944114],[34.056915,-118.248311],[28.539998,-81.370123]];
+        map.fitBounds(mapPlaces, {paddingTopLeft:[18,window.innerWidth<650?100:130],paddingBottomRight:[18,18],maxZoom:window.innerWidth<650?3:5});
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 19,
           attribution: 'Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
@@ -97,7 +98,16 @@
 
     function nav_onclick(event) {
       const location = event.currentTarget.getAttribute('href').slice(1);
+      const heading = document.getElementById(location);
+      if (!heading) return;
+      event.preventDefault();
       if (location === activeLocation) choosePhoto(location, true);
+      const navs = document.querySelector('.page-nav').offsetHeight + document.querySelector('.location-nav').offsetHeight;
+      const headingPadding = parseFloat(getComputedStyle(heading).paddingTop) || 0;
+      const target = window.scrollY + heading.getBoundingClientRect().top + headingPadding - navs - 8;
+      history.pushState(null, '', '#' + location);
+      window.scrollTo({top: Math.max(0,target),behavior:'instant'});
+      updateScroll();
     }
 
     window.addEventListener('scroll', updateScroll, {passive:true});
