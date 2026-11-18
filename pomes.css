@@ -461,3 +461,12 @@ body.archive-page:has(.about-letter) {
 }
 .lightbox { touch-action: none; }
 .lightbox-figure, .lightbox-figure img { touch-action: none; -webkit-user-select: none; user-select: none; }
+
+/* Keep Leaflet's required map credit legible but visually quiet. */
+#map-canvas .leaflet-control-attribution {
+  font-size: 9px;
+  line-height: 1.25;
+}
+@media (max-width:600px) {
+  #map-canvas .leaflet-control-attribution { font-size: 8px; }
+}
