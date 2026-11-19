@@ -64,6 +64,12 @@
   updateActive();
 })();
 (async function () {
+  // Give each native audio control an accessible name matching its visible title.
+  document.querySelectorAll('.sound-item').forEach(item => {
+    const label = item.querySelector('div');
+    const audio = item.querySelector('audio');
+    if (label && audio) audio.setAttribute('aria-label', label.textContent);
+  });
   const gallery = document.getElementById('gallery');
   const groups = [
     ['Detroit','detroit',10],
