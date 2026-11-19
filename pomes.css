@@ -507,3 +507,14 @@ body.archive-page:has(.about-letter) {
 @media (hover:none) {
   .archive-sticky-nav #nav a:hover:not([aria-current="location"]) { color: #111; background: transparent; }
 }
+
+/* Three recording columns on wider screens, two on tablets, one on phones. */
+.recordings-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 800px) {
+  .recordings-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  .recordings-grid { grid-template-columns: minmax(0, 1fr); }
+}
