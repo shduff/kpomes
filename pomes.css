@@ -493,21 +493,6 @@ body.archive-page:has(.about-letter) {
   cursor: pointer;
 }
 
-/* Sights & sounds uses the same sticky secondary navigation as poems. */
-.archive-sticky-nav #nav {
-  display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  flex-wrap: nowrap;
-  width: 100%;
-}
-.archive-sticky-nav #nav li { float: none; width: 100%; min-width: 0; padding: 0; flex: none; }
-.archive-sticky-nav #nav a { display: block; width: 100%; text-align: center; }
-.archive-sticky-nav #nav a:hover { color: #304331; background: #e9eee5; }
-.archive-sticky-nav #nav a[aria-current="location"] { color: #304331; background: #dce5d6; font-weight: bold; }
-@media (hover:none) {
-  .archive-sticky-nav #nav a:hover:not([aria-current="location"]) { color: #111; background: transparent; }
-}
-
 /* Three recording columns on wider screens, two on tablets, one on phones. */
 .recordings-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -517,28 +502,6 @@ body.archive-page:has(.about-letter) {
 }
 @media (max-width: 520px) {
   .recordings-grid { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* Archive subnav always spans the viewport in three equal columns.
-   More specific than the five-column mobile poem-location override. */
-.archive-sticky-nav { display: block; width: 100%; }
-.archive-sticky-nav ul#nav {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0;
-}
-.archive-sticky-nav ul#nav > li {
-  width: 100%;
-  min-width: 0;
-  flex: none;
-}
-.archive-sticky-nav ul#nav > li > a {
-  display: block;
-  width: 100%;
-  text-align: center;
 }
 
 /* Archive-only tabs: intentionally independent of the poem page's #nav. */
